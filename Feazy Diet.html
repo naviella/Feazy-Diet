@@ -1,0 +1,1442 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Feazy Diet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: phone-first single column. A five-tab bar sits at the bottom on phones and moves under the logo on wide screens. Peach carries summaries and primary actions, sky blue marks anything that comes from the AI. */
+:root{
+  --bg:#FFFFFF;
+  --ink:#141414;
+  --ink-2:#5A524C;
+  --peach:#FFC9AD;
+  --peach-soft:#FFF1E8;
+  --peach-deep:#F4A27E;
+  --sky:#A6DAF2;
+  --sky-soft:#EAF7FD;
+  --sand:#D8C9BE;
+  --line:#F1DED2;
+  --good:#187048;
+  --warn:#B4531A;
+  --bad:#B3261E;
+  --f-display:"Baloo 2",ui-rounded,"Trebuchet MS",sans-serif;
+  --f-body:"Nunito",ui-rounded,"Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--f-body);overflow-wrap:break-word}
+h1,h2,h3,h4{font-family:var(--f-display);margin:0;line-height:1.15;text-wrap:balance;color:var(--ink)}
+h1{font-size:clamp(1.9rem,6vw,2.7rem);font-weight:800}
+h2{font-size:1.55rem;font-weight:800}
+h3{font-size:1.2rem;font-weight:700}
+h4{font-size:1rem;font-weight:700}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+.muted{color:var(--ink-2)}
+.small{font-size:.875rem}
+.err{color:var(--bad);font-weight:700}
+.ok{color:var(--good);font-weight:700}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ico{width:22px;height:22px;flex:none}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+
+.app{max-width:960px;margin:0 auto;padding-block:10px 120px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.stack{display:grid;gap:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px}
+.view>*+*{margin-top:16px}
+
+/* header and tabs */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:8px 14px}
+.brand{display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;cursor:pointer;text-align:left;min-width:0}
+.brand svg{width:46px;height:46px;flex:none}
+.brand-name{display:block;font:800 1.7rem/1 var(--f-display)}
+.brand-name em{font-style:normal;background:linear-gradient(transparent 56%,var(--peach) 56%);padding:0 2px}
+.brand-tag{display:block;font:700 .72rem/1.3 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.avatar{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--peach);font:800 1.05rem/1 var(--f-display);cursor:pointer;flex:none;display:grid;place-items:center}
+.avatar svg{width:22px;height:22px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;background:var(--bg);border-top:1.5px solid var(--ink);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.tab{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 2px;border:0;background:none;color:var(--ink-2);font:700 .72rem/1.1 var(--f-body);cursor:pointer;border-radius:12px;min-width:0;min-height:48px}
+.tab .ic{display:grid;place-items:center;width:46px;height:30px;border-radius:15px}
+.tab .ic svg{width:22px;height:22px}
+.tab[aria-current="page"]{color:var(--ink)}
+.tab[aria-current="page"] .ic{background:var(--peach)}
+.tab .l-full{display:none}
+.tab .dot{position:absolute;top:2px;left:calc(50% + 8px);width:11px;height:11px;border-radius:50%;background:var(--sky);border:2px solid var(--ink)}
+@media (min-width:860px){
+  .top{flex-wrap:wrap}
+  .tabs{position:static;display:flex;flex-wrap:wrap;gap:6px;border:0;border-bottom:1.5px solid var(--line);padding:0 0 12px;order:3;width:100%;margin-top:6px}
+  .tab{flex-direction:row;gap:8px;padding:8px 14px;font-size:.95rem;min-height:44px;border-radius:14px}
+  .tab .ic{width:auto;height:auto;background:none!important}
+  .tab[aria-current="page"]{background:var(--peach)}
+  .tab .l-short{display:none}
+  .tab .l-full{display:inline}
+  .tab .dot{top:6px;left:auto;right:6px}
+  .app{padding-bottom:48px}
+}
+
+.banner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:var(--sky-soft);border:1.5px solid var(--ink);border-radius:16px;padding:12px 14px;margin-bottom:16px}
+.banner p{flex:1 1 220px;min-width:0}
+
+/* feature wordmarks */
+.wm{display:flex;align-items:center;gap:10px;min-width:0}
+.wm-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--peach);border:2px solid var(--ink);flex:none}
+.wm-ic svg{width:24px;height:24px}
+.wm-t{font:800 1.75rem/1.05 var(--f-display)}
+.wm-t mark{background:var(--sky);color:var(--ink);border-radius:9px;padding:0 7px;margin-right:1px}
+.wm-t small{font-size:.58em;font-weight:700;color:var(--ink-2);margin:0 2px}
+.feat-head{display:grid;gap:8px}
+.feat-head p{max-width:60ch}
+
+/* surfaces */
+.card{background:var(--bg);border:1.5px solid var(--line);border-radius:20px;padding:18px;min-width:0}
+.card.peach{background:var(--peach-soft);border-color:var(--peach)}
+.card.sky{background:var(--sky-soft);border-color:var(--sky)}
+.card>h3+*{margin-top:10px}
+.hero{display:grid;gap:14px;padding:22px}
+.hero p{max-width:56ch}
+.hero-top{display:flex;align-items:center;gap:14px}
+.hero-top svg{width:72px;height:72px;flex:none}
+.feat-card{display:grid;gap:10px;align-content:start}
+.feat-card p{color:var(--ink-2)}
+
+/* buttons and forms */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:800 .95rem/1.1 var(--f-body);padding:11px 18px;min-height:44px;border-radius:14px;border:2px solid var(--ink);background:var(--peach);color:var(--ink);box-shadow:0 3px 0 var(--ink);cursor:pointer;transition:transform .08s,box-shadow .08s,background .12s;text-align:center}
+.btn:hover{background:var(--peach-deep)}
+.btn:active{transform:translateY(3px);box-shadow:0 0 0 var(--ink)}
+.btn.sky{background:var(--sky)}
+.btn.sky:hover{background:#8ECBE8}
+.btn.plain{background:var(--bg)}
+.btn.plain:hover{background:var(--peach-soft)}
+.btn.sm{padding:7px 12px;min-height:38px;font-size:.85rem;border-radius:12px;box-shadow:0 2px 0 var(--ink)}
+.btn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.btn svg{width:18px;height:18px}
+.icon-btn{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;color:var(--ink-2);flex:none}
+.icon-btn:hover{background:var(--peach-soft);color:var(--ink)}
+.icon-btn svg{width:18px;height:18px}
+label.f{display:grid;gap:6px;font-weight:700;font-size:.9rem;min-width:0}
+input[type=text],input[type=number],input[type=time],select,textarea{font:600 1rem/1.3 var(--f-body);color:var(--ink);background:var(--bg);border:1.5px solid var(--ink);border-radius:12px;padding:10px 12px;min-height:44px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:48px}
+input[type=range]{width:100%;accent-color:#F4A27E;min-height:32px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:700 .85rem/1.1 var(--f-body);padding:9px 13px;border-radius:999px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);cursor:pointer;min-height:38px}
+.chip:hover{background:var(--peach-soft)}
+.chip[aria-pressed="true"]{background:var(--peach)}
+.chip.tag{cursor:default;background:var(--peach-soft);border-color:var(--line)}
+.chip.tag:hover{background:var(--peach-soft)}
+.hint{font-size:.85rem;color:var(--ink-2)}
+details.more{border:1.5px solid var(--line);border-radius:14px;padding:10px 14px}
+details.more summary{cursor:pointer;font-weight:800;min-height:28px}
+details.more[open] summary{margin-bottom:12px}
+
+/* home */
+.greet{display:grid;gap:2px}
+.checks{display:grid;gap:12px}
+.check-row{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center}
+.check-row .ck{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:var(--bg)}
+.check-row.done .ck{background:var(--peach-deep)}
+.check-row .ck svg{width:18px;height:18px}
+.check-row b{display:block;line-height:1.2}
+.ring-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.ring{width:132px;height:132px;flex:none}
+.rt1{font:800 26px var(--f-display);fill:var(--ink)}
+.rt2{font:700 11px var(--f-body);fill:var(--ink-2)}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,120px),1fr));gap:12px;flex:1 1 200px}
+.stat{display:grid;gap:0}
+.stat .k{font-size:.8rem;font-weight:700;color:var(--ink-2)}
+.stat b{font:800 1.5rem/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.stat .u{font-size:.78rem;color:var(--ink-2)}
+.macro{display:flex;height:14px;border-radius:7px;overflow:hidden;border:1.5px solid var(--ink);background:var(--bg)}
+.macro i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem;font-weight:700}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;border:1.5px solid var(--ink);background:var(--c)}
+.log{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.log-item{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center}
+.lt{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--peach-soft);border:1.5px solid var(--line);overflow:hidden}
+.lt img{width:100%;height:100%;object-fit:cover;display:block}
+.lt svg{width:22px;height:22px}
+.lm{min-width:0}
+.lm b{display:block;line-height:1.25}
+.empty{padding:14px;border:1.5px dashed var(--sand);border-radius:14px;color:var(--ink-2);font-size:.92rem}
+.ai-out{margin-top:12px}
+.ai-out>*+*{margin-top:.5em}
+.ai-out ul,.ai-out ol,.bub ul,.bub ol{padding-left:1.25em;margin:0}
+.ai-out h4,.bub h4{margin-top:.4em}
+.sw-row{display:flex;align-items:center;gap:12px;min-height:44px}
+.sw{position:relative;width:54px;height:32px;border-radius:16px;border:2px solid var(--ink);background:var(--bg);cursor:pointer;flex:none;padding:0}
+.sw .knob{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--ink);transition:transform .15s}
+.sw[aria-checked="true"]{background:var(--sky)}
+.sw[aria-checked="true"] .knob{transform:translateX(22px)}
+
+/* profile */
+.pf-grid{display:grid;gap:14px}
+.bmi{display:grid;gap:4px}
+.bmi b{font:800 1.7rem/1.1 var(--f-display)}
+.danger{border-color:var(--line)}
+
+/* chat */
+.chat{display:grid;gap:10px}
+.bub{max-width:min(94%,640px);padding:11px 14px;border-radius:18px;overflow-wrap:anywhere;min-width:0}
+.bub>*+*{margin-top:.5em}
+.bub.ai{background:var(--sky-soft);border:1.5px solid var(--sky);border-top-left-radius:6px;justify-self:start}
+.bub.me{background:var(--peach);border:1.5px solid var(--peach-deep);border-top-right-radius:6px;justify-self:end}
+.bub.bad{background:var(--bg);border:1.5px solid var(--bad);justify-self:start}
+.composer{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}
+.composer .btns{display:flex;gap:8px}
+.plan-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));gap:12px}
+
+/* take and know */
+.drop{display:grid;justify-items:center;gap:8px;text-align:center;padding:26px 16px;border:2px dashed var(--ink);border-radius:20px;background:var(--peach-soft);cursor:pointer}
+.drop:hover,.drop.over{background:var(--peach)}
+.drop:focus-within{outline:3px solid var(--ink);outline-offset:2px}
+.drop.off{opacity:.55;cursor:not-allowed}
+.drop .ico{width:34px;height:34px}
+.drop b{font:800 1.15rem/1.2 var(--f-display)}
+.prev-wrap{display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:14px;align-items:start}
+.prev-wrap img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;border:1.5px solid var(--ink);display:block;max-width:100%}
+@media (max-width:520px){.prev-wrap{grid-template-columns:1fr}.prev-wrap img{max-width:240px}}
+.res-head{display:grid;gap:4px}
+.res-kcal{font:800 2.4rem/1 var(--f-display);font-variant-numeric:tabular-nums}
+.items{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.items li{display:grid;gap:4px}
+.items .top-line{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.items .nm{font-weight:800}
+.ibar{height:8px;border-radius:4px;background:var(--peach-soft);border:1px solid var(--line);overflow:hidden}
+.ibar i{display:block;height:100%;background:var(--peach-deep)}
+.pill{display:inline-block;font-size:.78rem;font-weight:800;padding:3px 10px;border-radius:999px;border:1.5px solid var(--ink);background:var(--bg)}
+.pill.sky{background:var(--sky)}
+.warnbox{border:1.5px solid var(--warn);border-radius:14px;padding:10px 12px;background:var(--bg);color:var(--ink)}
+.spin{display:inline-block;width:16px;height:16px;border-radius:50%;border:3px solid var(--sand);border-top-color:var(--ink);vertical-align:-3px;margin-right:8px}
+@media (prefers-reduced-motion:no-preference){.spin{animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}}
+
+/* work out */
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.gym-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 44px;gap:8px;align-items:center;padding:10px 0;border-top:1.5px solid var(--line)}
+.gym-row .gn{grid-column:1/-1}
+.preview{background:var(--peach-soft);border:1.5px solid var(--peach);border-radius:14px;padding:12px 14px}
+.preview b{font:800 1.5rem/1.1 var(--f-display)}
+.bars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;height:170px}
+.bar{display:grid;grid-template-rows:auto 1fr auto;gap:4px;text-align:center;font-size:.74rem;font-weight:700;min-width:0}
+.bar .col{display:flex;align-items:flex-end}
+.bar .col i{display:block;width:100%;background:var(--peach-deep);border:1.5px solid var(--ink);border-radius:8px 8px 3px 3px;min-height:3px}
+.bar.zero .col i{background:var(--bg);border-color:var(--sand)}
+.bar.today .d{background:var(--sky);border-radius:8px}
+.bar .v{font-variant-numeric:tabular-nums}
+
+/* journey */
+.path{list-style:none;margin:0;padding:0;display:grid}
+.node{position:relative;display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;padding-bottom:20px}
+.node:last-child{padding-bottom:0}
+.node::before{content:"";position:absolute;left:22px;top:48px;bottom:0;width:4px;border-radius:2px;background:repeating-linear-gradient(to bottom,var(--sand) 0 6px,transparent 6px 12px)}
+.node.done::before{background:var(--peach-deep)}
+.node.lead::before{background:linear-gradient(to bottom,var(--peach-deep) var(--p,0%),var(--line) var(--p,0%))}
+.node:last-child::before{display:none}
+.badge{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:2.5px solid var(--ink);background:var(--bg);z-index:1}
+.badge svg{width:24px;height:24px}
+.node.done .badge{background:var(--peach-deep)}
+.node.locked .badge{background:var(--peach-soft);color:var(--ink-2);border-color:var(--ink-2)}
+.node.current .badge{background:var(--sky);box-shadow:0 0 0 5px var(--sky-soft)}
+.node.current .badge svg{width:36px;height:36px}
+.node.final .badge{background:var(--peach)}
+.node.final.locked .badge{background:var(--peach-soft)}
+.nbody{border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;min-width:0;background:var(--bg)}
+.node.done .nbody{background:var(--peach-soft);border-color:var(--peach)}
+.node.current .nbody{background:var(--sky-soft);border-color:var(--ink);border-width:2px}
+.node.final .nbody{background:var(--peach-soft);border-color:var(--peach-deep)}
+.nhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px}
+.nhead b{font:800 1.1rem/1.2 var(--f-display)}
+.nhead .w{font:800 1.1rem/1.2 var(--f-display);font-variant-numeric:tabular-nums}
+.pbar{height:12px;border-radius:6px;border:1.5px solid var(--ink);background:var(--bg);overflow:hidden;margin-top:8px}
+.pbar i{display:block;height:100%;background:var(--peach-deep)}
+.sim-big{font:800 1.6rem/1.15 var(--f-display)}
+.scen{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.scen li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;padding:8px 0;border-top:1.5px solid var(--line)}
+.scen li span:last-child{font-weight:800}
+@media (prefers-reduced-motion:no-preference){.node.current .badge{animation:pulse 2.4s ease-in-out infinite}@keyframes pulse{50%{box-shadow:0 0 0 9px var(--sky-soft)}}}
+
+.foot{margin-top:28px;padding-top:14px;border-top:1.5px solid var(--line);display:grid;gap:6px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:40;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:14px;font-weight:700;font-size:.9rem;max-width:min(92vw,420px);text-align:center}
+@media (min-width:860px){.toast{bottom:28px}}
+</style>
+
+<div class="app">
+  <header class="top">
+    <button class="brand" type="button" data-go="home" aria-label="Feazy Diet, kembali ke Hari Ini">
+      <span id="logo"></span>
+      <span><span class="brand-name">Feazy <em>Diet</em></span><span class="brand-tag">Fun and Easy Diet</span></span>
+    </button>
+    <button class="avatar" id="btn-profile" type="button" data-go="profile" aria-label="Profil dan kondisi kesehatan"></button>
+    <nav class="tabs" id="tabs" aria-label="Menu utama"></nav>
+  </header>
+
+  <div id="banner" class="banner" role="status" hidden></div>
+
+  <main>
+    <!-- HARI INI -->
+    <section class="view" id="v-home" data-view="home">
+      <div id="home-hero" class="stack">
+        <div class="card peach hero">
+          <div class="hero-top"><span id="hero-mascot"></span><h1>Diet yang fun dan easy, pas untuk tubuhmu</h1></div>
+          <p>Feazy Diet menyusun program dari berat badan, tinggi, dan riwayat penyakitmu, seperti diabetes, tekanan darah tinggi atau rendah, dan jantung. Isi profil dulu, lalu semua fitur ikut menyesuaikan.</p>
+          <div><button class="btn" type="button" data-go="profile">Isi profil kesehatan</button></div>
+        </div>
+        <div class="grid2">
+          <div class="card feat-card"><div class="wm" data-wm="qai"></div><p>Tanya ahli gizi virtual soal program diet dan olahraga yang cocok untuk kondisimu.</p><div><button class="btn sm plain" type="button" data-go="qai">Buka</button></div></div>
+          <div class="card feat-card"><div class="wm" data-wm="take"></div><p>Foto makanan atau minuman, lihat perkiraan kalori dan gizinya.</p><div><button class="btn sm plain" type="button" data-go="take">Buka</button></div></div>
+          <div class="card feat-card"><div class="wm" data-wm="work"></div><p>Catat olahraga, gym, dan aktivitas harian, lalu lihat kalori yang keluar.</p><div><button class="btn sm plain" type="button" data-go="work">Buka</button></div></div>
+          <div class="card feat-card"><div class="wm" data-wm="journey"></div><p>Naik level setiap target berat tercapai, lengkap dengan simulasi waktu sampai berat ideal.</p><div><button class="btn sm plain" type="button" data-go="journey">Buka</button></div></div>
+        </div>
+      </div>
+
+      <div id="home-body" class="stack" hidden>
+        <div id="home-today" class="stack"></div>
+        <div class="card sky">
+          <h3>Ulasan ahli gizi untuk hari ini</h3>
+          <p class="muted small">AI membaca catatan makanan dan olahraga hari ini, lalu memberi masukan singkat.</p>
+          <div><button class="btn sky needs-ai" type="button" id="ai-review-btn">Minta ulasan</button></div>
+          <div class="ai-out" id="ai-review-out" hidden></div>
+          <p class="hint ai-note" hidden>Fitur AI belum tersedia di tampilan ini. Buka halaman lewat Claude agar aktif.</p>
+        </div>
+        <div id="home-log"></div>
+        <div class="card" id="rem-card">
+          <h3>Pengingat harian</h3>
+          <p class="muted small">Muncul jika kamu belum foto makanan atau belum catat olahraga hari itu.</p>
+          <div class="row" style="margin-top:12px">
+            <label class="f" for="rem-time">Ingatkan mulai jam<input type="time" id="rem-time" value="18:00"></label>
+            <div class="sw-row"><button type="button" class="sw" id="rem-sw" role="switch" aria-checked="false" aria-labelledby="rem-sw-l"><span class="knob"></span></button><span id="rem-sw-l" style="font-weight:800">Nyalakan notifikasi</span></div>
+          </div>
+          <p class="small" id="rem-status" aria-live="polite" style="margin-top:10px"></p>
+          <p class="small" style="margin-top:8px"><a id="rem-cal" href="#" target="_blank" rel="noopener">Tambahkan pengingat harian ke Google Calendar</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFIL -->
+    <section class="view" id="v-profile" data-view="profile" hidden>
+      <div class="feat-head"><h2>Profil kesehatan</h2><p class="muted">Data ini dipakai untuk menghitung kebutuhan kalori dan menyesuaikan saran ahli gizi. Tersimpan di akunmu, atau di browser ini bila kamu belum masuk.</p></div>
+      <form class="card pf-grid" id="pf-form" novalidate>
+        <div class="row">
+          <label class="f" for="pf-name">Nama panggilan<input type="text" id="pf-name" autocomplete="given-name" maxlength="30"></label>
+          <label class="f" for="pf-sex">Jenis kelamin<select id="pf-sex"><option value="f">Perempuan</option><option value="m">Laki-laki</option></select></label>
+          <label class="f" for="pf-age">Usia (tahun)<input type="number" id="pf-age" inputmode="numeric" min="10" max="100"></label>
+        </div>
+        <div class="row">
+          <label class="f" for="pf-height">Tinggi badan (cm)<input type="number" id="pf-height" inputmode="decimal" min="120" max="230"></label>
+          <label class="f" for="pf-weight">Berat badan sekarang (kg)<input type="number" id="pf-weight" inputmode="decimal" step="0.1" min="30" max="250"></label>
+        </div>
+        <label class="f" for="pf-act">Aktivitas sehari-hari di luar olahraga
+          <select id="pf-act"><option value="1.2">Lebih banyak duduk (kerja kantoran, kuliah)</option><option value="1.35">Cukup aktif sehari-hari</option><option value="1.5">Banyak berdiri atau berjalan seharian</option></select>
+        </label>
+        <div class="stack" style="gap:8px">
+          <b id="pf-conds-l">Riwayat penyakit atau kondisi (boleh pilih lebih dari satu)</b>
+          <div class="chips" id="pf-conds" role="group" aria-labelledby="pf-conds-l"></div>
+        </div>
+        <label class="f" for="pf-other">Kondisi lain yang perlu diketahui ahli gizi<input type="text" id="pf-other" maxlength="120" placeholder="Contoh: kolesterol tinggi, operasi lambung"></label>
+        <label class="f" for="pf-allergy">Alergi atau pantangan makanan<input type="text" id="pf-allergy" maxlength="120" placeholder="Contoh: alergi udang, tidak makan daging babi"></label>
+        <label class="f" for="pf-meds">Obat yang rutin diminum (opsional)<input type="text" id="pf-meds" maxlength="120" placeholder="Contoh: metformin, amlodipine"></label>
+        <p class="err small" id="pf-err" role="alert" hidden></p>
+        <div><button class="btn" type="submit">Simpan profil</button></div>
+      </form>
+      <div class="card peach bmi" id="pf-bmi" hidden></div>
+      <div class="card danger">
+        <h3>Hapus semua data</h3>
+        <p class="muted small" style="margin-top:6px">Profil, catatan makanan, olahraga, dan target akan dihapus dari akun dan browser ini.</p>
+        <div style="margin-top:12px"><button class="btn sm plain" type="button" id="pf-reset">Hapus data</button></div>
+        <div id="pf-reset-box" hidden style="margin-top:12px"><p class="err small">Yakin? Data yang dihapus tidak bisa dikembalikan.</p><div class="chips" style="margin-top:8px"><button class="btn sm" type="button" id="pf-reset-yes">Ya, hapus semua</button><button class="btn sm plain" type="button" id="pf-reset-no">Batal</button></div></div>
+      </div>
+    </section>
+
+    <!-- Q&AI -->
+    <section class="view" id="v-qai" data-view="qai" hidden>
+      <div class="feat-head"><div class="wm" data-wm="qai"></div><p class="muted">Konsultasi program diet dan olahraga yang disesuaikan dengan profil dan riwayat penyakitmu. Jawaban bersifat edukasi, bukan pengganti dokter.</p></div>
+      <div id="qai-need" class="card peach" hidden><p>Isi profil dulu supaya saran bisa menyesuaikan dengan berat badan dan kondisi kesehatanmu.</p><div style="margin-top:10px"><button class="btn sm" type="button" data-go="profile">Isi profil</button></div></div>
+      <div class="card"><div class="chat" id="chat" aria-live="polite"></div></div>
+      <div class="chips" id="chat-chips"></div>
+      <form class="composer" id="chat-form">
+        <label class="sr" for="chat-input">Pesan untuk ahli gizi</label>
+        <textarea id="chat-input" rows="2" maxlength="1500" placeholder="Tulis pertanyaanmu, misalnya: menu sarapan untuk gula darah tinggi"></textarea>
+        <div class="btns"><button class="btn sky needs-ai" type="submit" id="chat-send">Kirim</button><button class="btn plain" type="button" id="chat-stop" hidden>Berhenti</button></div>
+      </form>
+      <p class="hint ai-note" hidden>Fitur AI belum tersedia di tampilan ini. Buka halaman lewat Claude agar konsultasi aktif.</p>
+      <div id="plan-box"></div>
+      <div id="plan-proposal"></div>
+      <details class="more">
+        <summary>Atur target manual</summary>
+        <form class="stack" id="pl-form" novalidate>
+          <div class="row">
+            <label class="f" for="pl-weight">Target berat (kg)<input type="number" id="pl-weight" inputmode="decimal" step="0.1" min="30" max="250"></label>
+            <label class="f" for="pl-kcal">Asupan kalori per hari (kosongkan untuk otomatis)<input type="number" id="pl-kcal" inputmode="numeric" min="1000" max="4000"></label>
+          </div>
+          <p class="err small" id="pl-err" role="alert" hidden></p>
+          <div><button class="btn sm" type="submit">Simpan target</button></div>
+        </form>
+      </details>
+    </section>
+
+    <!-- TAKE AND KNOW -->
+    <section class="view" id="v-take" data-view="take" hidden>
+      <div class="feat-head"><div class="wm" data-wm="take"></div><p class="muted">Foto makanan atau minumanmu. AI memperkirakan kalori dan gizinya dari tampilan foto, atau dari label gizi bila terlihat.</p></div>
+      <label class="drop" id="drop" for="photo">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3.5L9 5.5h6L16.5 8H20v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg>
+        <b>Foto atau pilih gambar</b>
+        <span class="muted small">JPG, PNG, atau WebP. Satu foto untuk satu kali analisis.</span>
+        <input class="sr" type="file" id="photo" accept="image/*">
+      </label>
+      <p class="hint" id="img-note" hidden>Analisis foto butuh akses gambar ke Claude dan belum tersedia di tampilan ini. Kamu tetap bisa mencatat makanan secara manual di bawah.</p>
+      <div class="card" id="take-prev" hidden>
+        <div class="prev-wrap">
+          <img id="take-img" alt="Foto makanan yang akan dianalisis">
+          <div class="stack" style="gap:10px">
+            <label class="f" for="take-note">Keterangan tambahan (opsional)<textarea id="take-note" rows="2" maxlength="200" placeholder="Contoh: porsi setengah piring, tanpa gula"></textarea></label>
+            <div class="chips"><button class="btn sky needs-ai" type="button" id="take-analyze">Analisis foto</button><button class="btn plain" type="button" id="take-clear">Ganti foto</button></div>
+            <p class="small" id="take-status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+      <div id="take-result"></div>
+      <details class="more">
+        <summary>Catat manual tanpa foto</summary>
+        <form class="stack" id="man-form" novalidate>
+          <div class="row">
+            <label class="f" for="man-name">Nama makanan atau minuman<input type="text" id="man-name" maxlength="60" placeholder="Contoh: Nasi goreng"></label>
+            <label class="f" for="man-kcal">Kalori (kkal)<input type="number" id="man-kcal" inputmode="numeric" min="1" max="4000"></label>
+            <label class="f" for="man-type">Waktu makan<select id="man-type"></select></label>
+          </div>
+          <p class="err small" id="man-err" role="alert" hidden></p>
+          <div><button class="btn sm" type="submit">Simpan</button></div>
+        </form>
+      </details>
+      <div id="take-list"></div>
+    </section>
+
+    <!-- WORK OUT -->
+    <section class="view" id="v-work" data-view="work" hidden>
+      <div class="feat-head"><div class="wm" data-wm="work"></div><p class="muted">Catat olahraga, latihan gym, dan aktivitas harian. Kalori yang keluar dihitung dari durasi, berat badanmu, dan beban yang diangkat.</p></div>
+      <div id="work-need" class="card peach" hidden><p>Isi berat badan di profil agar perhitungan kalori sesuai tubuhmu. Sementara ini dipakai berat 60 kg.</p><div style="margin-top:10px"><button class="btn sm" type="button" data-go="profile">Isi profil</button></div></div>
+      <div class="card">
+        <div class="seg" role="group" aria-label="Jenis catatan">
+          <button type="button" class="chip" data-wmode="sport" aria-pressed="true">Olahraga</button>
+          <button type="button" class="chip" data-wmode="gym" aria-pressed="false">Gym</button>
+          <button type="button" class="chip" data-wmode="neat" aria-pressed="false">Aktivitas harian</button>
+        </div>
+        <form class="stack" id="wf" style="margin-top:14px" novalidate>
+          <div id="wf-sport" class="row">
+            <label class="f" for="ws-type">Jenis olahraga<select id="ws-type"></select></label>
+            <label class="f" for="ws-min">Durasi (menit)<input type="number" id="ws-min" inputmode="decimal" min="1" max="600" value="30"></label>
+          </div>
+          <div id="wf-gym" class="stack" hidden>
+            <label class="f" for="wg-min">Durasi total latihan termasuk istirahat (menit)<input type="number" id="wg-min" inputmode="decimal" min="1" max="600" value="45"></label>
+            <div>
+              <div class="hint">Isi gerakan, jumlah set, repetisi per set, dan beban dalam kg. Kosongkan beban untuk gerakan dengan berat badan sendiri.</div>
+              <div id="gym-rows"></div>
+              <button type="button" class="btn sm plain" id="gym-add">Tambah gerakan</button>
+            </div>
+            <datalist id="gym-names"><option value="Bench press"><option value="Squat"><option value="Deadlift"><option value="Overhead press"><option value="Lat pulldown"><option value="Seated row"><option value="Leg press"><option value="Bicep curl"><option value="Triceps pushdown"><option value="Lunges"></datalist>
+          </div>
+          <div id="wf-neat" class="row" hidden>
+            <label class="f" for="wn-type">Aktivitas<select id="wn-type"></select></label>
+            <label class="f" for="wn-min"><span id="wn-lab">Durasi (menit)</span><input type="number" id="wn-min" inputmode="decimal" min="1" max="60000" value="30"></label>
+          </div>
+          <div class="preview" id="wf-prev" aria-live="polite"></div>
+          <p class="err small" id="wf-err" role="alert" hidden></p>
+          <div><button class="btn" type="submit">Simpan ke hari ini</button></div>
+        </form>
+        <details class="more" style="margin-top:14px">
+          <summary>Cara perhitungan kalori</summary>
+          <p class="small muted">Kalori tambahan = (MET - 1) x berat badan (kg) x durasi (jam). Nilai MET diambil dari tabel aktivitas fisik umum. Kebutuhan istirahat sudah masuk ke perhitungan harianmu, jadi tidak dihitung dua kali. Untuk gym, MET naik dari 3,5 ke 5 atau 6 sesuai volume beban per menit dibanding berat badanmu. Untuk langkah kaki dipakai sekitar 0,0005 kkal per langkah per kg berat badan. Semua angka adalah perkiraan. Jangan isi jalan kaki dua kali di olahraga dan aktivitas harian.</p>
+        </details>
+      </div>
+      <div class="card"><h3>Kalori terbakar 7 hari terakhir</h3><div style="margin-top:12px" id="work-week"></div></div>
+      <div id="work-list"></div>
+    </section>
+
+    <!-- MY JOURNEY -->
+    <section class="view" id="v-journey" data-view="journey" hidden>
+      <div class="feat-head"><div class="wm" data-wm="journey"></div><p class="muted">Pantau perjalananmu dari awal diet. Data diambil dari catatan makanan, olahraga, dan target berat dari konsultasi ahli gizi.</p></div>
+      <div id="jr-state"></div>
+      <div id="jr-summary"></div>
+      <div class="card" id="jw-card" hidden>
+        <h3>Timbang hari ini</h3>
+        <form class="composer" id="jw-form" style="margin-top:10px" novalidate>
+          <label class="f" for="jw-kg">Berat badan (kg)<input type="number" id="jw-kg" inputmode="decimal" step="0.1" min="30" max="250"></label>
+          <button class="btn" type="submit">Catat</button>
+        </form>
+        <p class="err small" id="jw-err" role="alert" hidden></p>
+        <p class="hint" style="margin-top:8px">Timbangan asli membuat perkiraan level lebih akurat.</p>
+      </div>
+      <div class="card sky" id="jr-sim-card" hidden>
+        <h3>Simulasi waktu mencapai berat ideal</h3>
+        <p class="muted small" style="margin-top:6px">Geser untuk melihat seberapa konsisten kamu menjalankan program makan dan olahraga.</p>
+        <div style="margin-top:12px">
+          <label class="f" for="jr-c"><span>Konsistensi: <b id="jr-cv">80%</b></span><input type="range" id="jr-c" min="20" max="100" step="5" value="80"></label>
+          <div class="chips" style="margin-top:8px"><span class="chip tag" id="jr-meas"></span><button type="button" class="btn sm plain" id="jr-usemeas">Pakai angka ini</button></div>
+        </div>
+        <div id="jr-sim-out" style="margin-top:14px"></div>
+      </div>
+      <div class="card" id="jr-path-card">
+        <h3 id="jr-path-t">Jalur levelmu</h3>
+        <p class="hint" id="jr-demo" hidden style="margin-top:6px">Ini contoh tampilan. Jalurmu muncul setelah target berat dari ahli gizi disimpan.</p>
+        <div style="margin-top:14px" id="jr-path"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p class="small muted">Feazy Diet memberi informasi edukasi umum. Angka kalori adalah perkiraan dan bukan pengganti pemeriksaan atau saran dokter. Jika kamu punya penyakit kronis atau minum obat, konsultasikan perubahan pola makan dan olahraga dengan dokter atau ahli gizi klinis.</p>
+    <p class="small muted" id="sync"></p>
+  </footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= helpers ================= */
+const $=(s,r)=>(r||document).querySelector(s);
+const $$=(s,r)=>Array.from((r||document).querySelectorAll(s));
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const num=(v,d)=>{const n=parseFloat(String(v==null?'':v).replace(',','.'));return isFinite(n)?n:(d||0)};
+const nf=(n,d)=>Number(n).toLocaleString('id-ID',{minimumFractionDigits:d||0,maximumFractionDigits:d||0});
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>{d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
+const parseD=s=>{const p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])};
+const addDays=(s,n)=>{const d=parseD(s);d.setDate(d.getDate()+n);return ymd(d)};
+const dnum=s=>{const p=s.split('-');return Date.UTC(+p[0],+p[1]-1,+p[2])/86400000};
+const daysBetween=(a,b)=>Math.round(dnum(b)-dnum(a));
+const fmtDate=s=>parseD(s).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+const fmtDay=s=>parseD(s).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const wdShort=s=>parseD(s).toLocaleDateString('id-ID',{weekday:'short'});
+const hhmm=ts=>{const d=new Date(ts);return pad(d.getHours())+'.'+pad(d.getMinutes())};
+
+let toastT=null;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{t.hidden=true},3200)}
+
+/* ================= icons and marks ================= */
+const IC={
+  home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>',
+  chat:'<path d="M4 5h16v11H9l-5 4V5z"/><path d="M8.5 9.5h7M8.5 12.5h4"/>',
+  cam:'<path d="M4 8h3.5L9 5.5h6L16.5 8H20v11H4z"/><circle cx="12" cy="13" r="3.6"/>',
+  dumbbell:'<path d="M6.5 8v8M17.5 8v8M3.5 10v4M20.5 10v4M6.5 12h11"/>',
+  flag:'<path d="M6 21V4"/><path d="M6 5h12l-3 3.5L18 12H6"/>',
+  play:'<path d="M8 5.5v13l10.5-6.5z"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  lock:'<rect x="5.5" y="10.5" width="13" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>',
+  user:'<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-4 3.8-5.5 7-5.5s6.2 1.5 7 5.5"/>',
+  trash:'<path d="M5 7h14M9.5 7V4.5h5V7M7 7l1 13h8l1-13"/>',
+  flame:'<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 2.5 1.5 2.5C10.5 9.5 11 6 12 3z"/>',
+  image:'<rect x="4" y="5" width="16" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M5 17l5-4.5 3.5 3 2.5-2L20 17"/>'
+};
+const ico=(n,c)=>'<svg class="ico'+(c?' '+c:'')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>';
+const MASCOT='<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="26" r="18.5" fill="#FFC9AD" stroke="#141414" stroke-width="2.5"/><ellipse cx="13.5" cy="29.5" rx="3.2" ry="2.1" fill="#F4A27E"/><ellipse cx="34.5" cy="29.5" rx="3.2" ry="2.1" fill="#F4A27E"/><circle cx="18" cy="23" r="2.2" fill="#141414"/><circle cx="30" cy="23" r="2.2" fill="#141414"/><path d="M18.5 30c1.8 2.8 9.2 2.8 11 0" fill="none" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/><path d="M26 7.5c3.5-3 8-2 9 .5-2 3.5-6 4-9-.5z" fill="#A6DAF2" stroke="#141414" stroke-width="2" stroke-linejoin="round"/></svg>';
+function wm(kind){
+  const m={
+    qai:['chat','Q&amp;<mark>AI</mark> Nutritionists'],
+    take:['cam','Take <small>and</small> Know'],
+    work:['dumbbell','Work Out'],
+    journey:['flag','My Journey']
+  }[kind];
+  return '<span class="wm-ic">'+ico(m[0])+'</span><span class="wm-t">'+m[1]+'</span>';
+}
+
+/* ================= state ================= */
+const LS='feazy-diet-v1';
+const blank=()=>({v:1,updatedAt:0,profile:null,plan:null,meals:[],workouts:[],weights:[],chat:[],hist:{},reached:{},sim:null,rem:{time:'18:00',notify:false,last:''}});
+let S=blank();
+function adopt(o){const b=blank();S=Object.assign(b,o||{});S.rem=Object.assign(b.rem,(o&&o.rem)||{});S.hist=S.hist||{};S.reached=S.reached||{};}
+function loadLocal(){try{const r=localStorage.getItem(LS);if(r){adopt(JSON.parse(r));return true}}catch(e){}return false}
+
+function compact(){
+  const cutoff=addDays(ymd(),-90);
+  const keepM=[],keepW=[];
+  S.meals.forEach(m=>{if(m.day<cutoff){const h=S.hist[m.day]||(S.hist[m.day]={in:0,out:0,m:0,w:0});h.in+=m.kcal;h.m++}else keepM.push(m)});
+  S.workouts.forEach(w=>{if(w.day<cutoff){const h=S.hist[w.day]||(S.hist[w.day]={in:0,out:0,m:0,w:0});h.out+=w.kcal;h.w++}else keepW.push(w)});
+  S.meals=keepM;S.workouts=keepW;
+  let n=0;for(let i=S.meals.length-1;i>=0;i--){if(S.meals[i].thumb){n++;if(n>24)S.meals[i].thumb=''}}
+  if(S.chat.length>30)S.chat=S.chat.slice(-30);
+}
+function save(){
+  S.updatedAt=Date.now();
+  compact();
+  try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}
+  schedRemote();
+}
+
+/* remote copy: private per-viewer document when the viewer can write it */
+const R={ref:null,busy:false,dirty:false,dead:false,t:null,ok:false};
+function schedRemote(){if(!R.ref||R.dead)return;clearTimeout(R.t);R.t=setTimeout(pushRemote,1500)}
+async function pushRemote(){
+  if(!R.ref||R.dead)return;
+  if(R.busy){R.dirty=true;return}
+  R.busy=true;
+  try{
+    do{
+      R.dirty=false;
+      let json=JSON.stringify(S);
+      if(json.length>240000){S.chat=S.chat.slice(-6);S.meals.forEach(m=>{m.thumb=''});json=JSON.stringify(S)}
+      await R.ref.set({json:json,updatedAt:S.updatedAt});
+    }while(R.dirty);
+  }catch(e){
+    if(e&&(e.code==='invalid_argument'||e.code==='quota_exceeded'||e.code==='revoked'||e.code==='not_granted'))R.dead=true;
+  }finally{R.busy=false;syncBadge()}
+}
+async function initRemote(){
+  try{
+    if(!(window.claude&&claude.use))return;
+    const pair=await Promise.all([claude.use('db'),claude.use('user')]);
+    const db=pair[0],user=pair[1];
+    if(!db||!user||typeof user.id!=='function')return;
+    const id=await user.id();
+    if(!id)return;
+    R.ref=db.doc('data/users/'+id+'/feazy');
+    const snap=await R.ref.get();
+    if(snap.exists){
+      const d=snap.data();
+      const o=d&&typeof d.json==='string'?JSON.parse(d.json):null;
+      if(o&&(o.updatedAt||0)>(S.updatedAt||0)){adopt(o);try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}renderAll();fillProfile()}
+      else if(o&&(S.updatedAt||0)>(o.updatedAt||0))schedRemote();
+    }else if(S.updatedAt)schedRemote();
+    R.ok=true;syncBadge();
+  }catch(e){}
+}
+function syncBadge(){
+  const el=$('#sync');if(!el)return;
+  el.textContent=(R.ok&&!R.dead)?'Datamu tersimpan di akunmu dan di browser ini.':'Datamu tersimpan di browser ini.';
+}
+
+/* ================= domain ================= */
+const ACT={'1.2':'Lebih banyak duduk','1.35':'Cukup aktif sehari-hari','1.5':'Banyak berdiri atau berjalan seharian'};
+const COND=['Diabetes','Tekanan darah tinggi','Tekanan darah rendah','Penyakit jantung','Kolesterol tinggi','Asam urat','Maag atau GERD','Penyakit ginjal','Gangguan tiroid','PCOS','Hamil atau menyusui','Riwayat gangguan makan'];
+const MEALS=['Sarapan','Makan siang','Makan malam','Camilan','Minuman'];
+const SPORT=[['walk-fast','Jalan cepat',4.3],['run-easy','Lari santai (sekitar 8 km/jam)',8.3],['run-fast','Lari cepat (sekitar 10 km/jam)',9.8],['bike-easy','Bersepeda santai',4],['bike-fast','Bersepeda cepat',8],['swim','Berenang',6],['yoga','Yoga',2.5],['pilates','Pilates',3],['aerobic','Senam aerobik',6.5],['dance','Zumba atau menari',5.5],['hiit','HIIT atau sirkuit',8],['rope','Lompat tali',10],['body','Latihan beban tubuh (push up, sit up)',4.5],['badminton','Badminton',5.5],['futsal','Futsal atau sepak bola',7],['basket','Basket',6.5],['stairs','Naik turun tangga (latihan)',6]];
+const NEAT=[['walk-easy','Jalan santai',2.8],['stand','Berdiri sambil bekerja',1.8],['house','Bersih-bersih rumah',3.3],['cook','Memasak',1.8],['garden','Berkebun',3.8],['shop','Belanja sambil berjalan',2.3],['play','Bermain aktif dengan anak',4],['stairs-d','Naik tangga biasa',4],['steps','Langkah kaki (isi jumlah langkah)',0]];
+
+function curWeight(){
+  const w=S.weights.slice().sort((a,b)=>a.day<b.day?-1:a.day>b.day?1:0);
+  return w.length?w[w.length-1].kg:(S.profile?S.profile.weightKg:60);
+}
+const bmi=(kg,cm)=>kg/Math.pow(cm/100,2);
+const bmiCat=b=>b<18.5?'di bawah normal':b<23?'normal':b<25?'berat berlebih':'obesitas';
+function bmrOf(kg){const p=S.profile;const b=10*kg+6.25*p.heightCm-5*p.age;return p.sex==='m'?b+5:b-161}
+function baseBurn(){return S.profile?bmrOf(curWeight())*(num(S.profile.act)||1.2):0}
+const kcalMet=(met,kg,min)=>Math.max(0,(met-1)*kg*min/60);
+function gymMet(rows,min,kg){
+  const vol=rows.reduce((a,r)=>a+r.s*r.r*r.w,0);
+  const dens=(min>0&&kg>0)?vol/(min*kg):0;
+  return {vol:vol,dens:dens,met:dens<1?3.5:dens<2.5?5:6};
+}
+function dayInfo(d){
+  let intake=0,meals=0,wk=0,works=0;
+  S.meals.forEach(m=>{if(m.day===d){intake+=m.kcal;meals++}});
+  S.workouts.forEach(w=>{if(w.day===d){wk+=w.kcal;works++}});
+  const h=S.hist[d];if(h){intake+=h.in;meals+=h.m;wk+=h.out;works+=h.w}
+  return {intake:intake,meals:meals,wk:wk,works:works};
+}
+const todayMeals=()=>S.meals.filter(m=>m.day===ymd()).sort((a,b)=>a.ts-b.ts);
+const todayWorks=()=>S.workouts.filter(w=>w.day===ymd()).sort((a,b)=>a.ts-b.ts);
+function missing(){const i=dayInfo(ymd());return {meal:i.meals===0,work:i.works===0}}
+function isDue(){const p=(S.rem.time||'18:00').split(':');const n=new Date();return n.getHours()*60+n.getMinutes()>=(+p[0])*60+(+p[1]||0)}
+
+function consistency14(){
+  const p=S.profile;if(!p)return 0;
+  const today=ymd();const span=Math.min(14,daysBetween(p.startDate,today)+1);
+  if(span<=0)return 0;
+  let score=0;
+  for(let i=0;i<span;i++){const info=dayInfo(addDays(today,-i));score+=(info.meals>0?0.6:0)+(info.works>0?0.4:0)}
+  return score/span;
+}
+function avgWorkoutDay(){
+  const today=ymd();let sum=0,n=0;
+  for(let i=0;i<14;i++){const info=dayInfo(addDays(today,-i));if(info.works>0){sum+=info.wk;n++}}
+  return n?sum/n:0;
+}
+function perDayRate(c){
+  const p=S.profile,pl=S.plan;
+  const bal=pl.dailyCalorieTarget-(baseBurn()+avgWorkoutDay()*4/7);
+  const dir=pl.targetWeightKg<p.startWeightKg?-1:1;
+  const toward=dir<0?-bal:bal;
+  if(toward<=0)return 0;
+  return Math.min(toward*c/7700,1/7);
+}
+function eta(remainKg,c){
+  const r=perDayRate(c);
+  if(r<=0.0004)return null;
+  const days=Math.ceil(remainKg/r);
+  return {days:days,weeks:Math.ceil(days/7),date:addDays(ymd(),days),far:days>1460};
+}
+
+function journeyModel(){
+  const p=S.profile,pl=S.plan;if(!p||!pl)return null;
+  const start=p.startWeightKg,target=pl.targetWeightKg;
+  const total=Math.abs(start-target);
+  if(total<0.4)return {flat:true};
+  const dir=target<start?-1:1;
+  const ws=S.weights.slice().sort((a,b)=>a.day<b.day?-1:a.day>b.day?1:0);
+  const anchor=ws.length?ws[ws.length-1]:{day:p.startDate,kg:start};
+  const today=ymd(),n=Math.max(0,daysBetween(p.startDate,today)),base=baseBurn();
+  let defSince=0,defAll=0,wkAll=0,logged=0;
+  for(let i=0;i<=n;i++){
+    const d=addDays(p.startDate,i),info=dayInfo(d);
+    wkAll+=info.wk;
+    if(info.meals>0){logged++;const def=-(info.intake-(base+info.wk));defAll+=def;if(d>anchor.day)defSince+=def}
+  }
+  const est=anchor.kg-defSince/7700;
+  const step=total<=3?0.5:total<=8?1:total<=16?2:total<=30?3:5;
+  const count=Math.ceil(total/step-1e-9);
+  const nodes=[{i:0,w:start,kind:'start'}];
+  for(let k=1;k<=count;k++){const w=k===count?target:Math.round((start+dir*k*step)*10)/10;nodes.push({i:k,w:w,kind:k===count?'final':'mid'})}
+  const reached=(w)=>dir<0?est<=w+1e-9:est>=w-1e-9;
+  let cur=nodes.length;
+  for(let i=1;i<nodes.length;i++){if(!reached(nodes[i].w)){cur=i;break}}
+  let frac=0;
+  if(cur<nodes.length){const prev=nodes[cur-1].w,nxt=nodes[cur].w;frac=clamp((prev-est)/(prev-nxt),0,1)}
+  let changed=false;
+  nodes.forEach((nd,idx)=>{if(idx<cur&&!S.reached[idx]){S.reached[idx]=idx===0?p.startDate:today;changed=true}});
+  return {nodes:nodes,cur:cur,frac:frac,est:est,start:start,target:target,dir:dir,total:total,anchor:anchor,defAll:defAll,wkAll:wkAll,logged:logged,days:n+1,changed:changed};
+}
+
+/* ================= markdown (safe) ================= */
+function md(src){
+  const lines=String(src||'').replace(/\r/g,'').split('\n');
+  const inline=t=>esc(t).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/(^|[\s(])\*(?!\s)([^*]+?)\*(?=[\s).,!?:;]|$)/g,'$1<em>$2</em>').replace(/`([^`]+)`/g,'<code>$1</code>');
+  let html='',list=null;
+  const close=()=>{if(list){html+='</'+list+'>';list=null}};
+  for(const raw of lines){
+    const l=raw.trimEnd();let m;
+    if(!l.trim()){close();continue}
+    if((m=l.match(/^\s*#{1,4}\s+(.*)$/))){close();html+='<h4>'+inline(m[1])+'</h4>';continue}
+    if((m=l.match(/^\s*[-*\u2022]\s+(.*)$/))){if(list!=='ul'){close();html+='<ul>';list='ul'}html+='<li>'+inline(m[1])+'</li>';continue}
+    if((m=l.match(/^\s*\d+[.)]\s+(.*)$/))){if(list!=='ol'){close();html+='<ol>';list='ol'}html+='<li>'+inline(m[1])+'</li>';continue}
+    close();html+='<p>'+inline(l)+'</p>';
+  }
+  close();return html;
+}
+
+/* ================= AI ================= */
+let sampleFn=null,imgOK=false,aiChecked=false,aiBlocked=false;
+const aiOff=()=>aiBlocked||(aiChecked&&!sampleFn);
+async function initAI(){
+  try{
+    if(window.claude&&claude.use){
+      sampleFn=await claude.use('sample');
+      if(sampleFn&&typeof sampleFn.limits==='function'){const lim=await sampleFn.limits().catch(()=>null);imgOK=!!(lim&&lim.images)}
+    }
+  }catch(e){sampleFn=null}
+  aiChecked=true;applyAI();
+}
+function applyAI(){
+  const off=aiOff();
+  $$('.needs-ai').forEach(b=>{if(!b.dataset.busy)b.disabled=off});
+  $$('.ai-note').forEach(n=>{n.hidden=!off});
+  const imgOff=off||(aiChecked&&!imgOK);
+  $('#photo').disabled=imgOff;
+  $('#drop').classList.toggle('off',imgOff);
+  $('#img-note').hidden=!imgOff;
+  $$('[data-act="plan-ai"]').forEach(b=>{b.disabled=off});
+}
+function aiErr(e){
+  const c=e&&e.code;
+  if(c==='not_granted'||c==='sampling_disabled'||c==='not_declared'||c==='capability_disabled'||c==='capability_removed'){aiBlocked=true;applyAI();return 'Akses Claude belum diizinkan untuk halaman ini, jadi fitur AI dimatikan. Muat ulang halaman lalu izinkan saat diminta.'}
+  if(c==='rate_limited')return 'Terlalu banyak permintaan atau batas pemakaian Claude tercapai. Coba lagi beberapa saat lagi.';
+  if(c==='image_rejected')return 'Gambar tidak bisa dibaca. Coba foto lain dengan format JPG, PNG, atau WebP.';
+  if(c==='images_unavailable')return 'Analisis foto belum tersedia di tampilan ini. Gunakan catat manual.';
+  if(c==='session_expired')return 'Sesi berakhir. Masuk lagi lalu coba kembali.';
+  if(c==='refused')return 'Claude tidak bisa menjawab permintaan ini. Ubah isi pesannya lalu coba lagi.';
+  if(c==='invalid_json'||c==='empty_completion')return 'Jawaban AI tidak terbaca dengan baik. Coba kirim ulang.';
+  return 'Ada gangguan sementara. Coba lagi sebentar lagi.';
+}
+function setBusy(btn,b){if(!btn)return;if(b){btn.dataset.busy='1';btn.disabled=true}else{delete btn.dataset.busy;btn.disabled=aiOff()}}
+
+const SAFETY='Aturan keselamatan: jangan beri defisit kalori untuk pengguna di bawah 18 tahun, ibu hamil atau menyusui, atau orang dengan riwayat gangguan makan (arahkan ke dokter atau ahli gizi). Jangan menyarankan asupan di bawah 1.200 kkal per hari untuk perempuan atau 1.500 kkal untuk laki-laki. Untuk penyakit kronis, ingatkan konsultasi ke dokter sebelum mengubah obat atau memulai olahraga berat, dan jangan mendiagnosis. Tolak diet ekstrem dan obat pelangsing.';
+function ctxText(){
+  const p=S.profile;
+  if(!p)return 'Profil pengguna belum diisi. Tanyakan data dasar (usia, tinggi, berat, riwayat penyakit) atau minta pengguna mengisi menu Profil.';
+  const w=curWeight(),b=bmi(w,p.heightCm);
+  const conds=(p.conds||[]).concat(p.other?[p.other]:[]);
+  const l=[
+    'Jenis kelamin: '+(p.sex==='m'?'laki-laki':'perempuan'),
+    'Usia: '+p.age+' tahun',
+    'Tinggi: '+p.heightCm+' cm',
+    'Berat terkini: '+nf(w,1)+' kg (IMT '+nf(b,1)+', '+bmiCat(b)+')',
+    'Aktivitas harian di luar olahraga: '+(ACT[String(p.act)]||'-'),
+    'Riwayat penyakit atau kondisi: '+(conds.join(', ')||'tidak ada yang dicatat')
+  ];
+  if(p.allergy)l.push('Alergi atau pantangan makanan: '+p.allergy);
+  if(p.meds)l.push('Obat rutin: '+p.meds);
+  if(S.plan)l.push('Target saat ini: '+nf(S.plan.targetWeightKg,1)+' kg dengan asupan '+nf(S.plan.dailyCalorieTarget)+' kkal per hari');
+  const i=dayInfo(ymd());
+  l.push('Hari ini: masuk '+nf(i.intake)+' kkal, olahraga membakar '+nf(i.wk)+' kkal');
+  l.push('Perkiraan kebutuhan energi harian di luar olahraga: '+nf(baseBurn())+' kkal');
+  return l.join('\n');
+}
+function chatRules(){
+  return 'PERAN\nKamu adalah "Q&AI Nutritionists", ahli gizi virtual di aplikasi Feazy Diet (Fun and Easy Diet) dengan pengetahuan gizi, olahraga, dan kesehatan yang sangat baik. Jawab dalam bahasa Indonesia yang ramah, santai, dan jelas.\n\n'+
+  'TUGAS\nMembantu program diet dan olahraga yang cocok dengan kondisi tubuh pengguna: berat, tinggi, usia, dan riwayat penyakit seperti diabetes, tekanan darah tinggi atau rendah, jantung, dan lainnya.\n\n'+
+  'ATURAN\n1. Selalu sesuaikan saran dengan profil di bawah. Bila data penting belum ada, tanyakan paling banyak 2 hal dulu.\n'+
+  '2. Beri angka konkret (rentang kalori, porsi, durasi, frekuensi, contoh menu dengan makanan Indonesia yang mudah didapat) dan alasan singkatnya.\n'+
+  '3. Saat diminta menentukan target berat badan, sebut satu angka target yang realistis beserta perkiraan lamanya. Pakai IMT 18,5 sampai 24,9 sebagai acuan umum, mulai dengan target awal 5 sampai 10 persen dari berat badan, dengan laju 0,25 sampai 0,75 kg per minggu dan tidak lebih dari 1 kg per minggu.\n'+
+  '4. Untuk penyakit kronis, beri saran gizi dan aktivitas yang umumnya aman, lalu ingatkan singkat untuk konsultasi dengan dokter atau ahli gizi klinis sebelum mengubah obat (terutama insulin, obat diabetes, obat tekanan darah, pengencer darah) atau memulai olahraga berat. Jangan mendiagnosis dan jangan mengubah dosis obat.\n'+
+  '5. Jangan beri defisit kalori untuk pengguna di bawah 18 tahun, ibu hamil atau menyusui, atau orang dengan riwayat gangguan makan. Arahkan ke dokter atau ahli gizi, dan beri saran pola makan sehat umum tanpa angka pembatasan.\n'+
+  '6. Jangan menyarankan asupan di bawah 1.200 kkal per hari untuk perempuan atau 1.500 kkal untuk laki-laki. Tolak diet ekstrem, puasa berkepanjangan, obat pelangsing, dan suplemen pembakar lemak.\n'+
+  '7. Bila pengguna menyebut gejala berbahaya (nyeri dada, sesak napas, pingsan, gula darah sangat rendah atau sangat tinggi disertai gejala, sakit kepala hebat dengan tekanan darah sangat tinggi), minta mereka segera ke fasilitas kesehatan terdekat.\n'+
+  '8. Format: paragraf pendek dan bullet seperlunya, tanpa tabel, maksimal sekitar 220 kata kecuali diminta rinci. Tutup dengan satu pertanyaan lanjutan atau langkah berikutnya.\n\n'+
+  'PROFIL PENGGUNA\n'+ctxText();
+}
+
+/* ================= tabs, routing ================= */
+const TABS=[['home','Hari Ini','Hari Ini','home'],['qai','Q&amp;AI Nutritionists','Q&amp;AI','chat'],['take','Take and Know','Take','cam'],['work','Work Out','Work Out','dumbbell'],['journey','My Journey','Journey','flag']];
+const HASH={home:'hari-ini',qai:'qai',take:'take-and-know',work:'work-out',journey:'my-journey',profile:'profil'};
+const BYHASH={};Object.keys(HASH).forEach(k=>{BYHASH[HASH[k]]=k});
+let curView='home';
+function buildTabs(){
+  $('#tabs').innerHTML=TABS.map(t=>'<button type="button" class="tab" data-go="'+t[0]+'" data-tab="'+t[0]+'"><span class="ic">'+ico(t[3])+'</span><span class="l-short">'+t[2]+'</span><span class="l-full">'+t[1]+'</span><i class="dot" hidden></i></button>').join('');
+}
+function show(v){
+  if(!HASH[v])v='home';
+  curView=v;
+  $$('.view').forEach(el=>{el.hidden=el.dataset.view!==v});
+  $$('.tab').forEach(t=>{if(t.dataset.go===v)t.setAttribute('aria-current','page');else t.removeAttribute('aria-current')});
+  if(v==='profile')fillProfile();
+  if(v==='journey')renderJourney();
+  if(v==='work')wPreview();
+  window.scrollTo(0,0);
+}
+function go(v){show(v);try{if(location.hash!=='#'+HASH[v])location.hash=HASH[v]}catch(e){}}
+window.addEventListener('hashchange',()=>{const v=BYHASH[location.hash.slice(1)];if(v&&v!==curView)show(v)});
+
+/* ================= banner and reminders ================= */
+let remNote='';
+function renderBanner(){
+  const el=$('#banner'),p=S.profile;
+  const m=missing(),due=isDue(),on=!!p&&due;
+  const pending=!!p&&(m.meal||m.work);
+  el.hidden=!(on&&pending);
+  if(!el.hidden){
+    const parts=[];if(m.meal)parts.push('belum foto makanan');if(m.work)parts.push('belum catat olahraga');
+    el.innerHTML='<p><b>Pengingat hari ini.</b> Kamu '+parts.join(' dan ')+'.</p><div class="chips">'+(m.meal?'<button type="button" class="btn sm" data-go="take">Foto makanan</button>':'')+(m.work?'<button type="button" class="btn sm plain" data-go="work">Catat olahraga</button>':'')+'</div>';
+  }
+  const flag={home:on&&pending,take:on&&!!p&&m.meal,work:on&&!!p&&m.work};
+  $$('.tab').forEach(t=>{const d=$('.dot',t);if(d)d.hidden=!flag[t.dataset.tab]});
+  document.title=(on&&pending?'(!) ':'')+'Feazy Diet';
+}
+function notifSupported(){return typeof window.Notification!=='undefined'}
+function remStatus(){
+  const sw=$('#rem-sw');if(!sw)return;
+  sw.setAttribute('aria-checked',S.rem.notify?'true':'false');
+  const t=$('#rem-time');if(t&&document.activeElement!==t)t.value=S.rem.time||'18:00';
+  let msg;
+  if(S.rem.notify)msg='Aktif. Notifikasi muncul mulai jam '+S.rem.time+' bila foto makanan atau data olahraga hari ini belum ada, selama halaman ini terbuka.';
+  else if(remNote==='unsupported')msg='Browser ini tidak mendukung notifikasi. Pengingat tetap muncul di dalam halaman.';
+  else if(remNote==='denied')msg='Izin notifikasi ditolak. Ubah izin situs di pengaturan browser, atau pakai pengingat kalender di bawah.';
+  else if(remNote==='blocked')msg='Notifikasi diblokir di tampilan ini. Pengingat tetap muncul di dalam halaman, dan kamu bisa memakai pengingat kalender di bawah.';
+  else msg='Notifikasi mati. Pengingat tetap muncul di dalam halaman ini.';
+  $('#rem-status').textContent=msg;
+  const d=ymd().replace(/-/g,''),hm=(S.rem.time||'18:00').replace(':','');
+  const endM=(()=>{const p=(S.rem.time||'18:00').split(':');const mm=((+p[0])*60+(+p[1]||0)+15)%1440;return pad(Math.floor(mm/60))+pad(mm%60)})();
+  let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+  $('#rem-cal').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Feazy Diet: foto makanan dan catat olahraga')+'&details='+encodeURIComponent('Buka Feazy Diet, foto makanan, dan catat olahraga hari ini.')+'&dates='+d+'T'+hm+'00/'+d+'T'+endM+'00&recur='+encodeURIComponent('RRULE:FREQ=DAILY')+(tz?'&ctz='+encodeURIComponent(tz):'');
+}
+async function toggleNotify(){
+  if(S.rem.notify){S.rem.notify=false;remNote='';save();remStatus();return}
+  if(!notifSupported()){remNote='unsupported';remStatus();return}
+  try{
+    const perm=Notification.permission==='granted'?'granted':await Notification.requestPermission();
+    if(perm==='granted'){
+      S.rem.notify=true;remNote='';save();
+      try{new Notification('Feazy Diet aktif',{body:'Kami ingatkan jam '+S.rem.time+' bila catatan hari ini belum lengkap.'})}catch(e){}
+    }else{S.rem.notify=false;remNote='denied'}
+  }catch(e){S.rem.notify=false;remNote='blocked'}
+  remStatus();
+}
+function notifyTick(){
+  if(!S.profile||!S.rem.notify||!notifSupported()||Notification.permission!=='granted')return;
+  if(!isDue()||S.rem.last===ymd())return;
+  const m=missing();if(!m.meal&&!m.work)return;
+  const parts=[];if(m.meal)parts.push('belum foto makanan');if(m.work)parts.push('belum catat olahraga');
+  try{new Notification('Feazy Diet',{body:'Hari ini kamu '+parts.join(' dan ')+'. Yuk catat sekarang.'});S.rem.last=ymd();save()}catch(e){}
+}
+
+/* ================= HOME ================= */
+function chk(done,title,detail,go,label){
+  return '<div class="check-row'+(done?' done':'')+'"><span class="ck">'+(done?ico('check'):'')+'</span><div><b>'+esc(title)+'</b><span class="muted small">'+esc(detail)+'</span></div>'+(done?'<span></span>':'<button type="button" class="btn sm" data-go="'+go+'">'+esc(label)+'</button>')+'</div>';
+}
+function ringSVG(pct,c1,c2,over){
+  const r=54,c=2*Math.PI*r,off=c*(1-clamp(pct,0,1));
+  return '<svg class="ring" viewBox="0 0 132 132" role="img" aria-label="'+esc(c1+' '+c2)+'"><circle cx="66" cy="66" r="54" fill="none" stroke="#FFE3D3" stroke-width="14"/><circle cx="66" cy="66" r="54" fill="none" stroke="'+(over?'#B4531A':'#F4A27E')+'" stroke-width="14" stroke-linecap="round" stroke-dasharray="'+c.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 66 66)"/><text x="66" y="66" text-anchor="middle" class="rt1">'+esc(c1)+'</text><text x="66" y="84" text-anchor="middle" class="rt2">'+esc(c2)+'</text></svg>';
+}
+function macroBar(p,c,f){
+  const kp=p*4,kc=c*4,kf=f*9,t=kp+kc+kf;
+  if(t<=0)return '<div class="macro" aria-hidden="true"></div>';
+  return '<div class="macro" aria-hidden="true"><i style="width:'+(kp/t*100).toFixed(1)+'%;background:var(--sky)"></i><i style="width:'+(kc/t*100).toFixed(1)+'%;background:var(--peach)"></i><i style="width:'+(kf/t*100).toFixed(1)+'%;background:var(--sand)"></i></div>';
+}
+const legend=(p,c,f)=>'<div class="legend"><span style="--c:var(--sky)">Protein '+nf(p)+' g</span><span style="--c:var(--peach)">Karbo '+nf(c)+' g</span><span style="--c:var(--sand)">Lemak '+nf(f)+' g</span></div>';
+
+function logHTML(meals,works,withTitle,title){
+  const items=[];
+  meals.forEach(m=>items.push({ts:m.ts,html:'<li class="log-item"><span class="lt">'+(m.thumb?'<img alt="" src="'+esc(m.thumb)+'">':ico('image'))+'</span><div class="lm"><b>'+esc(m.name)+'</b><span class="muted small">'+esc(m.type||'Makan')+' · '+hhmm(m.ts)+' · '+nf(m.kcal)+' kkal</span></div><button type="button" class="icon-btn" data-del="m" data-id="'+esc(m.id)+'" aria-label="Hapus '+esc(m.name)+'">'+ico('trash')+'</button></li>'}));
+  works.forEach(w=>items.push({ts:w.ts,html:'<li class="log-item"><span class="lt">'+ico(w.kind==='gym'?'dumbbell':'flame')+'</span><div class="lm"><b>'+esc(w.label)+'</b><span class="muted small">'+(w.minutes?nf(w.minutes)+' menit · ':'')+hhmm(w.ts)+' · '+nf(w.kcal)+' kkal terbakar'+(w.detail?' · '+esc(w.detail):'')+'</span></div><button type="button" class="icon-btn" data-del="w" data-id="'+esc(w.id)+'" aria-label="Hapus '+esc(w.label)+'">'+ico('trash')+'</button></li>'}));
+  items.sort((a,b)=>a.ts-b.ts);
+  return '<div class="card">'+(withTitle?'<h3>'+esc(title)+'</h3>':'')+(items.length?'<ul class="log" style="margin-top:12px">'+items.map(i=>i.html).join('')+'</ul>':'<div class="empty" style="margin-top:12px">Belum ada catatan hari ini.</div>')+'</div>';
+}
+
+function renderHome(){
+  const p=S.profile;
+  $('#home-hero').hidden=!!p;$('#home-body').hidden=!p;
+  if(!p)return;
+  const today=ymd(),info=dayInfo(today),base=baseBurn(),burn=Math.round(base+info.wk);
+  const goal=S.plan?S.plan.dailyCalorieTarget:null;
+  const mm=todayMeals().reduce((a,m)=>({p:a.p+(m.protein||0),c:a.c+(m.carbs||0),f:a.f+(m.fat||0)}),{p:0,c:0,f:0});
+  let html='<div class="greet"><h2>Halo, '+esc(p.name||'teman')+'</h2><p class="muted">'+esc(fmtDay(today))+'</p></div><div class="grid2">';
+  html+='<div class="card peach"><h3>Pengingat</h3><div class="checks" style="margin-top:12px">'+
+    chk(info.meals>0,'Foto makanan',info.meals>0?info.meals+' makanan atau minuman tercatat':'Belum ada yang tercatat','take','Foto sekarang')+
+    chk(info.works>0,'Data olahraga',info.works>0?info.works+' aktivitas, '+nf(info.wk)+' kkal terbakar':'Belum ada yang tercatat','work','Catat olahraga')+
+    '</div></div>';
+  html+='<div class="card"><h3>Kalori hari ini</h3><div class="ring-wrap" style="margin-top:12px">'+
+    ringSVG(goal?info.intake/goal:0,goal?nf(info.intake):'Belum ada',goal?'dari '+nf(goal)+' kkal':'target kalori',goal&&info.intake>goal)+
+    '<div class="stat-grid"><div class="stat"><span class="k">Masuk</span><b>'+nf(info.intake)+'</b><span class="u">kkal</span></div><div class="stat"><span class="k">Keluar</span><b>'+nf(burn)+'</b><span class="u">kkal, termasuk '+nf(info.wk)+' dari olahraga</span></div><div class="stat"><span class="k">'+(goal&&left(goal,info.intake)<0?'Melebihi target':'Sisa target')+'</span><b>'+(goal?nf(Math.abs(goal-info.intake)):'-')+'</b><span class="u">kkal</span></div></div></div>'+
+    '<div style="margin-top:14px;display:grid;gap:8px">'+macroBar(mm.p,mm.c,mm.f)+legend(Math.round(mm.p),Math.round(mm.c),Math.round(mm.f))+'</div>'+
+    (goal?'':'<p class="hint" style="margin-top:12px">Target kalori muncul setelah kamu mengambil rekomendasi dari ahli gizi di Q&amp;AI Nutritionists.</p>')+
+    '</div>';
+  html+='</div>';
+  $('#home-today').innerHTML=html;
+  $('#home-log').innerHTML=logHTML(todayMeals(),todayWorks(),true,'Riwayat hari ini');
+}
+const left=(g,i)=>g-i;
+
+/* ================= PROFILE ================= */
+let condSel=new Set();
+function buildConds(){
+  $('#pf-conds').innerHTML=COND.map(c=>'<button type="button" class="chip" data-cond="'+esc(c)+'" aria-pressed="false">'+esc(c)+'</button>').join('');
+}
+function paintConds(){$$('#pf-conds .chip').forEach(b=>b.setAttribute('aria-pressed',condSel.has(b.dataset.cond)?'true':'false'))}
+function fillProfile(){
+  const p=S.profile;
+  if(p){
+    $('#pf-name').value=p.name||'';$('#pf-sex').value=p.sex||'f';$('#pf-age').value=p.age||'';$('#pf-height').value=p.heightCm||'';
+    $('#pf-weight').value=curWeight();$('#pf-act').value=String(p.act||1.2);
+    $('#pf-other').value=p.other||'';$('#pf-allergy').value=p.allergy||'';$('#pf-meds').value=p.meds||'';
+    condSel=new Set(p.conds||[]);
+  }
+  paintConds();bmiCard();
+}
+function bmiCard(){
+  const p=S.profile,box=$('#pf-bmi');
+  if(!p){box.hidden=true;return}
+  const w=curWeight(),h=p.heightCm/100,b=bmi(w,p.heightCm);
+  box.hidden=false;
+  box.innerHTML='<h3>Indeks massa tubuh</h3><b>'+nf(b,1)+' ('+bmiCat(b)+')</b><p class="small muted">Rentang berat normal untuk tinggimu sekitar '+nf(18.5*h*h,1)+' sampai '+nf(22.9*h*h,1)+' kg, memakai acuan Asia-Pasifik. IMT hanya gambaran umum, bukan diagnosis.</p>';
+}
+function saveProfile(e){
+  e.preventDefault();
+  const err=$('#pf-err');
+  const name=$('#pf-name').value.trim(),age=Math.round(num($('#pf-age').value)),h=num($('#pf-height').value),w=num($('#pf-weight').value);
+  let msg='';
+  if(!(age>=10&&age<=100))msg='Isi usia antara 10 dan 100 tahun.';
+  else if(!(h>=120&&h<=230))msg='Isi tinggi badan antara 120 dan 230 cm.';
+  else if(!(w>=30&&w<=250))msg='Isi berat badan antara 30 dan 250 kg.';
+  if(msg){err.textContent=msg;err.hidden=false;return}
+  err.hidden=true;
+  const prev=S.profile,today=ymd();
+  const p={name:name,sex:$('#pf-sex').value,age:age,heightCm:h,weightKg:w,act:num($('#pf-act').value)||1.2,conds:Array.from(condSel),other:$('#pf-other').value.trim(),allergy:$('#pf-allergy').value.trim(),meds:$('#pf-meds').value.trim(),startWeightKg:prev?prev.startWeightKg:w,startDate:prev?prev.startDate:today};
+  const old=prev?curWeight():null;
+  S.profile=p;
+  if(!prev)S.weights=[{day:today,kg:w}];
+  else if(Math.abs(w-old)>0.05){S.weights=S.weights.filter(x=>x.day!==today);S.weights.push({day:today,kg:w})}
+  save();renderAll();bmiCard();
+  toast('Profil tersimpan');
+  if(!prev)go('home');
+}
+
+/* ================= Q&AI ================= */
+let chatCtl=null,chatBusy=false;
+const CHIPS=['Buatkan program diet untuk kondisiku','Olahraga apa yang aman untukku?','Contoh menu makan 1 hari','Berapa target berat badan idealku?'];
+function renderChatChips(){
+  $('#chat-chips').innerHTML=CHIPS.map(c=>'<button type="button" class="chip" data-q="'+esc(c)+'">'+esc(c)+'</button>').join('');
+}
+function renderChat(){
+  let h='<div class="bub ai"><p>Halo! Aku ahli gizi virtual Feazy Diet. Ceritakan tujuan dietmu, atau tanya soal makanan dan olahraga yang cocok untuk kondisimu.</p></div>';
+  S.chat.forEach(m=>{h+=m.role==='user'?'<div class="bub me"><p>'+esc(m.content).replace(/\n/g,'<br>')+'</p></div>':'<div class="bub ai">'+md(m.content)+'</div>'});
+  $('#chat').innerHTML=h;
+}
+function chatUI(b){
+  chatBusy=b;
+  $('#chat-stop').hidden=!b;
+  setBusy($('#chat-send'),b);
+  $('#chat-input').readOnly=b;
+}
+async function sendChat(text){
+  text=String(text||'').trim();
+  if(chatBusy||!text)return;
+  if(!sampleFn||aiOff()){toast('Fitur AI belum tersedia di tampilan ini.');return}
+  S.chat.push({role:'user',content:text.slice(0,1500)});
+  save();renderChat();
+  $('#chat-input').value='';
+  chatUI(true);
+  const box=$('#chat');
+  box.insertAdjacentHTML('beforeend','<div class="bub ai"><p class="muted"><span class="spin"></span>Sedang menyiapkan jawaban</p></div>');
+  const live=box.lastElementChild;
+  live.scrollIntoView({block:'nearest'});
+  chatCtl=new AbortController();
+  const turns=[{role:'user',content:chatRules()}].concat(S.chat.slice(-16).map(m=>({role:m.role,content:m.content})));
+  try{
+    const r=await sampleFn(turns,{cache:false,signal:chatCtl.signal,onText:u=>{live.innerHTML=md(u.text);live.scrollIntoView({block:'nearest'})}});
+    S.chat.push({role:'assistant',content:r.text.slice(0,4000)});
+    save();renderChat();
+  }catch(e){
+    if(e&&e.text&&e.text.trim()){
+      S.chat.push({role:'assistant',content:e.text.slice(0,4000)+(e.code==='cancelled'?'\n\n(dihentikan)':'\n\n(jawaban terputus)')});
+      save();renderChat();
+      if(e.code!=='cancelled')toast(aiErr(e));
+    }else{
+      S.chat.pop();save();renderChat();
+      $('#chat-input').value=text;
+      if(!e||e.code!=='cancelled')$('#chat').insertAdjacentHTML('beforeend','<div class="bub bad"><p class="err">'+esc(aiErr(e))+'</p></div>');
+    }
+  }finally{chatUI(false);chatCtl=null}
+}
+
+/* plan (target for My Journey) */
+function renderPlan(){
+  const box=$('#plan-box'),pl=S.plan;
+  $('#qai-need').hidden=!!S.profile;
+  if(!pl){
+    box.innerHTML='<div class="card peach"><h3>Target untuk My Journey</h3><p class="muted small" style="margin-top:6px">Belum ada target. Ngobrol dulu dengan ahli gizi, lalu ambil targetnya di sini.</p><div style="margin-top:12px"><button type="button" class="btn sky" data-act="plan-ai"'+(S.profile?'':' disabled')+'>Ambil target dari konsultasi</button></div></div>';
+  }else{
+    box.innerHTML='<div class="card peach"><h3>Target untuk My Journey</h3><div class="plan-nums" style="margin-top:12px"><div class="stat"><span class="k">Target berat</span><b>'+nf(pl.targetWeightKg,1)+' kg</b></div><div class="stat"><span class="k">Asupan</span><b>'+nf(pl.dailyCalorieTarget)+'</b><span class="u">kkal per hari</span></div><div class="stat"><span class="k">Laju</span><b>'+nf(pl.weeklyKg,2)+'</b><span class="u">kg per minggu</span></div></div>'+(pl.rationale?'<p class="small" style="margin-top:12px">'+esc(pl.rationale)+'</p>':'')+(pl.cautions?'<p class="small muted" style="margin-top:6px">'+esc(pl.cautions)+'</p>':'')+'<div class="chips" style="margin-top:12px"><button type="button" class="btn sky sm" data-act="plan-ai">Perbarui dari konsultasi</button><button type="button" class="btn sm plain" data-go="journey">Lihat My Journey</button></div><p class="hint" style="margin-top:8px">'+(pl.source==='ai'?'Disusun AI dari konsultasi':'Diatur manual')+' pada '+esc(fmtDate(pl.setAt))+'.</p></div>';
+  }
+  applyAI();
+}
+function cleanPlan(r){
+  const p=S.profile;if(!p)return null;
+  const blocked=p.age<18||(p.conds||[]).indexOf('Hamil atau menyusui')>=0||(p.conds||[]).indexOf('Riwayat gangguan makan')>=0;
+  const w=curWeight(),h=p.heightCm/100,minW=18.5*h*h,base=baseBurn();
+  let t=num(r.targetWeightKg);
+  if(!(t>=30))return {error:'Target berat belum jelas.'};
+  if(r.direction==='pertahankan'||Math.abs(t-w)<0.5)return {maintain:true};
+  const loss=t<w;
+  if(loss&&blocked)return {blocked:true};
+  if(loss)t=Math.max(t,minW);
+  if(loss&&w-t<0.5)return {maintain:true};
+  t=Math.round(t*10)/10;
+  const floor=p.sex==='m'?1500:1200;
+  let k=num(r.dailyCalorieTarget);
+  if(!(k>0))k=loss?base-550:base+300;
+  k=loss?clamp(k,floor,Math.max(floor,base-150)):clamp(k,base+100,base+700);
+  k=Math.round(k/10)*10;
+  const weekly=Math.min(1,Math.abs(k-base)*7/7700);
+  return {plan:{targetWeightKg:t,dailyCalorieTarget:k,weeklyKg:Math.round(weekly*100)/100,rationale:String(r.rationale||'').slice(0,260),cautions:String(r.cautions||'').slice(0,220),source:r.source||'ai',setAt:ymd()}};
+}
+let proposed=null;
+async function proposePlan(btn){
+  if(!sampleFn||aiOff()){toast('Fitur AI belum tersedia di tampilan ini.');return}
+  if(!S.profile){toast('Isi profil dulu.');go('profile');return}
+  const out=$('#plan-proposal');
+  setBusy(btn,true);
+  out.innerHTML='<div class="card sky"><p><span class="spin"></span>Ahli gizi sedang menyusun target dari percakapanmu</p></div>';
+  const convo=S.chat.slice(-16).map(m=>(m.role==='user'?'Pengguna: ':'Ahli gizi: ')+m.content).join('\n\n')||'(belum ada percakapan)';
+  const prompt=chatRules()+'\n\nPERCAKAPAN SEJAUH INI\n'+convo+'\n\nTUGAS\nTentukan rencana untuk fitur My Journey. Jika ahli gizi dalam percakapan sudah menyebut target berat badan atau target kalori, pakai angka itu selama masih aman. Jika belum ada, tentukan sendiri rencana yang aman sesuai aturan di atas.\nBalas HANYA dengan satu objek JSON seperti ini:\n{"direction":"turun" atau "naik" atau "pertahankan","targetWeightKg":angka,"dailyCalorieTarget":angka,"weeklyChangeKg":angka positif,"rationale":"maksimal 35 kata","cautions":"maksimal 30 kata, kosongkan bila tidak perlu"}\nSemua angka berupa angka murni.';
+  try{
+    const r=await sampleFn.json(prompt,{cache:false});
+    const c=cleanPlan(r||{});
+    if(!c||c.error){out.innerHTML='<div class="card"><p class="err">Target belum bisa ditentukan. Ceritakan tujuan dietmu dulu ke ahli gizi, lalu coba lagi.</p></div>'}
+    else if(c.blocked){out.innerHTML='<div class="card"><p><b>Target penurunan berat sebaiknya ditentukan bersama dokter atau ahli gizi.</b></p><p class="small muted" style="margin-top:6px">Untuk usia di bawah 18 tahun, kehamilan atau menyusui, dan riwayat gangguan makan, aku tidak membuat target kalori otomatis.</p></div>'}
+    else if(c.maintain){out.innerHTML='<div class="card"><p><b>Saran saat ini adalah mempertahankan berat badan.</b></p><p class="small muted" style="margin-top:6px">My Journey dibuat untuk perjalanan menuju target yang berbeda dari berat sekarang. Kamu tetap bisa mencatat makanan dan olahraga.</p></div>'}
+    else{
+      proposed=c.plan;
+      const d=proposed.targetWeightKg-curWeight();
+      out.innerHTML='<div class="card sky"><h3>Usulan dari ahli gizi</h3><div class="plan-nums" style="margin-top:12px"><div class="stat"><span class="k">Target berat</span><b>'+nf(proposed.targetWeightKg,1)+' kg</b><span class="u">'+(d<0?'turun ':'naik ')+nf(Math.abs(d),1)+' kg dari sekarang</span></div><div class="stat"><span class="k">Asupan</span><b>'+nf(proposed.dailyCalorieTarget)+'</b><span class="u">kkal per hari</span></div><div class="stat"><span class="k">Laju</span><b>'+nf(proposed.weeklyKg,2)+'</b><span class="u">kg per minggu</span></div></div>'+(proposed.rationale?'<p class="small" style="margin-top:12px">'+esc(proposed.rationale)+'</p>':'')+(proposed.cautions?'<p class="small muted" style="margin-top:6px">'+esc(proposed.cautions)+'</p>':'')+'<div class="chips" style="margin-top:12px"><button type="button" class="btn" data-act="plan-use">Pakai untuk My Journey</button><button type="button" class="btn plain" data-act="plan-cancel">Batal</button></div></div>';
+    }
+  }catch(e){
+    out.innerHTML='<div class="card"><p class="err">'+esc(aiErr(e))+'</p></div>';
+  }finally{setBusy(btn,false)}
+}
+function usePlan(){
+  if(!proposed)return;
+  S.plan=proposed;S.reached={};S.sim=null;proposed=null;
+  save();$('#plan-proposal').innerHTML='';renderAll();
+  toast('Target tersimpan di My Journey');go('journey');
+}
+function manualPlan(e){
+  e.preventDefault();
+  const err=$('#pl-err');
+  if(!S.profile){err.textContent='Isi profil dulu.';err.hidden=false;return}
+  const t=num($('#pl-weight').value),k=num($('#pl-kcal').value);
+  const c=cleanPlan({direction:t<curWeight()?'turun':'naik',targetWeightKg:t,dailyCalorieTarget:k||0,rationale:'',cautions:'',source:'manual'});
+  if(!c||c.error){err.textContent='Isi target berat antara 30 dan 250 kg.';err.hidden=false;return}
+  if(c.blocked){err.textContent='Untuk kondisimu, target penurunan berat sebaiknya ditentukan bersama dokter atau ahli gizi.';err.hidden=false;return}
+  if(c.maintain){err.textContent='Target harus berbeda sedikitnya 0,5 kg dari berat sekarang.';err.hidden=false;return}
+  err.hidden=true;
+  S.plan=c.plan;S.reached={};S.sim=null;save();renderAll();toast('Target tersimpan di My Journey');go('journey');
+}
+
+/* ================= TAKE AND KNOW ================= */
+let photo={blob:null,thumb:'',preview:''},foodRes=null,takeCtl=null;
+function mealDefault(){const h=new Date().getHours();return h<10?'Sarapan':h<15?'Makan siang':h<18?'Camilan':'Makan malam'}
+function mealOptions(sel){return MEALS.map(m=>'<option'+(m===sel?' selected':'')+'>'+m+'</option>').join('')}
+function shrink(file,max,q){
+  return new Promise((res,rej)=>{
+    const url=URL.createObjectURL(file),img=new Image();
+    img.onload=()=>{
+      const s=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));
+      const w=Math.max(1,Math.round(img.naturalWidth*s)),h=Math.max(1,Math.round(img.naturalHeight*s));
+      const c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      URL.revokeObjectURL(url);
+      c.toBlob(b=>b?res({blob:b,canvas:c}):rej(new Error('toBlob')),'image/jpeg',q);
+    };
+    img.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('decode'))};
+    img.src=url;
+  });
+}
+function scaled(canvas,w,q){
+  const s=w/canvas.width,c=document.createElement('canvas');
+  c.width=Math.max(1,Math.round(canvas.width*Math.min(1,s)));c.height=Math.max(1,Math.round(canvas.height*Math.min(1,s)));
+  c.getContext('2d').drawImage(canvas,0,0,c.width,c.height);
+  return c.toDataURL('image/jpeg',q);
+}
+async function onPhoto(file){
+  if(!file)return;
+  const st=$('#take-status');
+  if(!/^image\//.test(file.type||'')){toast('Pilih file gambar (JPG, PNG, atau WebP).');return}
+  try{
+    const r=await shrink(file,1024,0.85);
+    photo={blob:r.blob,thumb:scaled(r.canvas,72,0.6),preview:scaled(r.canvas,420,0.85)};
+    $('#take-img').src=photo.preview;
+    $('#take-prev').hidden=false;
+    $('#take-result').innerHTML='';foodRes=null;st.textContent='';
+    $('#take-prev').scrollIntoView({block:'nearest'});
+  }catch(e){toast('Foto belum bisa dibaca di browser ini. Coba format JPG atau PNG.')}
+}
+function clearPhoto(){photo={blob:null,thumb:'',preview:''};foodRes=null;$('#take-prev').hidden=true;$('#take-result').innerHTML='';$('#take-img').removeAttribute('src');$('#photo').value='';$('#take-note').value='';$('#take-status').textContent=''}
+function normFood(r){
+  if(!r||r.isFood===false)return null;
+  const items=(Array.isArray(r.items)?r.items:[]).slice(0,8).map(it=>({name:String(it.name||'Makanan').slice(0,60),portion:String(it.portion||'').slice(0,50),kcal:Math.round(clamp(num(it.kcal),0,3500)),protein:Math.round(clamp(num(it.protein),0,300)*10)/10,carbs:Math.round(clamp(num(it.carbs),0,500)*10)/10,fat:Math.round(clamp(num(it.fat),0,300)*10)/10})).filter(x=>x.kcal>0||x.protein>0||x.carbs>0||x.fat>0);
+  if(!items.length)return null;
+  const t=items.reduce((a,x)=>({kcal:a.kcal+x.kcal,protein:a.protein+x.protein,carbs:a.carbs+x.carbs,fat:a.fat+x.fat}),{kcal:0,protein:0,carbs:0,fat:0});
+  const conf=['rendah','sedang','tinggi'].indexOf(String(r.confidence))>=0?String(r.confidence):'sedang';
+  return {title:String(r.title||items[0].name).slice(0,80),items:items,total:t,sugar:Math.round(clamp(num(r.sugarG),0,300)),sodium:Math.round(clamp(num(r.sodiumMg),0,8000)),fiber:Math.round(clamp(num(r.fiberG),0,100)),confidence:conf,basis:r.basis==='label gizi'?'label gizi':'visual',note:String(r.note||'').slice(0,200),advice:String(r.advice||'').slice(0,240)};
+}
+async function analyze(){
+  if(!photo.blob)return;
+  if(!sampleFn||aiOff()){toast('Fitur AI belum tersedia di tampilan ini.');return}
+  const btn=$('#take-analyze'),st=$('#take-status');
+  setBusy(btn,true);
+  st.innerHTML='<span class="spin"></span>Menganalisis foto, tunggu sebentar';
+  $('#take-result').innerHTML='';
+  const note=$('#take-note').value.trim().slice(0,200);
+  const prompt='Kamu ahli gizi. Lihat foto makanan atau minuman ini lalu perkirakan kandungan gizinya untuk porsi yang terlihat. Kenali masakan Indonesia dengan baik. Jika ada label informasi nilai gizi di foto, pakai angkanya.\n\nPROFIL PENGGUNA\n'+ctxText()+'\n\nKeterangan dari pengguna: '+(note||'(tidak ada)')+'\n\nBalas HANYA dengan satu objek JSON:\n{"isFood":true atau false,"title":"nama singkat hidangan","items":[{"name":"","portion":"perkiraan porsi, misalnya 1 piring sekitar 200 g","kcal":0,"protein":0,"carbs":0,"fat":0}],"sugarG":0,"sodiumMg":0,"fiberG":0,"confidence":"rendah" atau "sedang" atau "tinggi","basis":"visual" atau "label gizi","note":"maksimal 25 kata tentang asumsi","advice":"maksimal 30 kata saran khusus untuk riwayat penyakit atau kondisi pengguna, kosongkan bila tidak ada"}\nSatuan: kkal untuk energi, gram untuk protein, karbo, lemak, gula, serat, dan mg untuk natrium. Semua angka berupa angka murni. Jika foto bukan makanan atau minuman, balas {"isFood":false}.';
+  takeCtl=new AbortController();
+  try{
+    const r=await sampleFn.json(prompt,{images:[photo.blob],signal:takeCtl.signal});
+    const f=normFood(r);
+    if(!f){st.textContent='';$('#take-result').innerHTML='<div class="card"><p><b>Foto ini belum terbaca sebagai makanan atau minuman.</b></p><p class="small muted" style="margin-top:6px">Coba foto dari atas dengan cahaya cukup, atau tambahkan keterangan.</p></div>'}
+    else{foodRes=f;st.textContent='';renderFoodResult()}
+  }catch(e){
+    st.innerHTML='<span class="err">'+esc(aiErr(e))+'</span>';
+  }finally{setBusy(btn,false);takeCtl=null}
+}
+function renderFoodResult(){
+  const f=foodRes;if(!f)return;
+  const t=f.total,goal=S.plan?S.plan.dailyCalorieTarget:null,cur=dayInfo(ymd()).intake;
+  const maxK=Math.max.apply(null,f.items.map(i=>i.kcal).concat([1]));
+  let h='<div class="card peach"><div class="res-head"><span class="pill sky" style="justify-self:start">Perkiraan dari '+(f.basis==='label gizi'?'label gizi':'tampilan foto')+', keyakinan '+esc(f.confidence)+'</span><h3 style="margin-top:6px">'+esc(f.title)+'</h3><div class="res-kcal">'+nf(t.kcal)+' <span style="font-size:1rem;font-weight:700">kkal</span></div></div>';
+  h+='<div style="margin-top:14px;display:grid;gap:8px">'+macroBar(t.protein,t.carbs,t.fat)+legend(Math.round(t.protein),Math.round(t.carbs),Math.round(t.fat))+'</div>';
+  h+='<ul class="items" style="margin-top:14px">'+f.items.map(i=>'<li><div class="top-line"><span class="nm">'+esc(i.name)+'</span><span style="font-weight:800">'+nf(i.kcal)+' kkal</span></div><div class="ibar"><i style="width:'+Math.max(2,i.kcal/maxK*100).toFixed(0)+'%"></i></div><span class="muted small">'+esc(i.portion)+(i.portion?' · ':'')+'P '+nf(i.protein,1)+' g · K '+nf(i.carbs,1)+' g · L '+nf(i.fat,1)+' g</span></li>').join('')+'</ul>';
+  h+='<div class="chips" style="margin-top:12px"><span class="chip tag">Gula '+nf(f.sugar)+' g</span><span class="chip tag">Natrium '+nf(f.sodium)+' mg</span><span class="chip tag">Serat '+nf(f.fiber)+' g</span></div>';
+  if(goal)h+='<p class="small" style="margin-top:12px">Dengan makanan ini, asupanmu hari ini menjadi <b>'+nf(cur+t.kcal)+'</b> dari target '+nf(goal)+' kkal.</p>';
+  if(f.advice)h+='<div class="warnbox small" style="margin-top:12px">'+esc(f.advice)+'</div>';
+  if(f.note)h+='<p class="hint" style="margin-top:10px">'+esc(f.note)+'</p>';
+  h+='<form class="row" id="res-form" style="margin-top:14px;align-items:end" novalidate><label class="f" for="res-type">Waktu makan<select id="res-type">'+mealOptions(mealDefault())+'</select></label><label class="f" for="res-kcal">Kalori yang dicatat (kkal)<input type="number" id="res-kcal" inputmode="numeric" min="1" max="4000" value="'+t.kcal+'"></label><button class="btn" type="submit">Catat ke hari ini</button></form><p class="hint" style="margin-top:8px">Ubah angka kalori bila porsimu berbeda dari perkiraan.</p></div>';
+  $('#take-result').innerHTML=h;
+}
+function saveFood(e){
+  e.preventDefault();
+  const f=foodRes;if(!f)return;
+  const k=Math.round(num($('#res-kcal').value));
+  if(!(k>0&&k<=4000)){toast('Isi kalori antara 1 dan 4000 kkal.');return}
+  const ratio=f.total.kcal>0?k/f.total.kcal:1;
+  S.meals.push({id:uid(),ts:Date.now(),day:ymd(),type:$('#res-type').value,name:f.title,kcal:k,protein:Math.round(f.total.protein*ratio),carbs:Math.round(f.total.carbs*ratio),fat:Math.round(f.total.fat*ratio),sugar:f.sugar,sodium:f.sodium,thumb:photo.thumb});
+  save();clearPhoto();renderAll();toast('Tercatat di hari ini');
+}
+function saveManual(e){
+  e.preventDefault();
+  const err=$('#man-err'),name=$('#man-name').value.trim(),k=Math.round(num($('#man-kcal').value));
+  if(!name||!(k>0&&k<=4000)){err.textContent='Isi nama dan kalori antara 1 dan 4000 kkal.';err.hidden=false;return}
+  err.hidden=true;
+  S.meals.push({id:uid(),ts:Date.now(),day:ymd(),type:$('#man-type').value,name:name,kcal:k,protein:0,carbs:0,fat:0,sugar:0,sodium:0,thumb:''});
+  $('#man-name').value='';$('#man-kcal').value='';
+  save();renderAll();toast('Tercatat di hari ini');
+}
+function renderTake(){
+  const ms=todayMeals(),total=ms.reduce((a,m)=>a+m.kcal,0);
+  $('#take-list').innerHTML=logHTML(ms,[],true,'Makanan hari ini'+(ms.length?' · '+nf(total)+' kkal':''));
+}
+
+/* ================= WORK OUT ================= */
+let wmode='sport',gymRows=[{n:'',s:3,r:10,w:''}];
+function fillSelect(sel,list){sel.innerHTML=list.map(t=>'<option value="'+t[0]+'">'+esc(t[1])+'</option>').join('')}
+function renderGym(){
+  $('#gym-rows').innerHTML=gymRows.map((r,i)=>'<div class="gym-row"><input class="gn" type="text" list="gym-names" data-g="n" data-i="'+i+'" value="'+esc(r.n)+'" placeholder="Gerakan, misalnya Bench press" aria-label="Nama gerakan '+(i+1)+'" maxlength="40"><input type="number" inputmode="numeric" min="1" max="30" data-g="s" data-i="'+i+'" value="'+esc(r.s)+'" placeholder="Set" aria-label="Jumlah set gerakan '+(i+1)+'"><input type="number" inputmode="numeric" min="1" max="100" data-g="r" data-i="'+i+'" value="'+esc(r.r)+'" placeholder="Reps" aria-label="Repetisi per set gerakan '+(i+1)+'"><input type="number" inputmode="decimal" min="0" max="500" step="0.5" data-g="w" data-i="'+i+'" value="'+esc(r.w)+'" placeholder="Beban kg" aria-label="Beban dalam kg gerakan '+(i+1)+'"><button type="button" class="icon-btn" data-gdel="'+i+'" aria-label="Hapus gerakan '+(i+1)+'"'+(gymRows.length<2?' disabled':'')+'>'+ico('trash')+'</button></div>').join('');
+}
+function wcalc(){
+  const kg=curWeight();
+  if(wmode==='sport'){
+    const t=SPORT.find(x=>x[0]===$('#ws-type').value)||SPORT[0],min=num($('#ws-min').value);
+    return {ok:min>0,kind:'sport',label:t[1],minutes:min,kcal:Math.round(kcalMet(t[2],kg,min)),detail:'',how:'MET '+nf(t[2],1)+', berat '+nf(kg,1)+' kg, '+nf(min)+' menit'};
+  }
+  if(wmode==='neat'){
+    const t=NEAT.find(x=>x[0]===$('#wn-type').value)||NEAT[0],v=num($('#wn-min').value);
+    if(t[0]==='steps')return {ok:v>0,kind:'neat',label:'Langkah kaki',minutes:Math.round(v/100),kcal:Math.round(v*0.0005*kg),detail:nf(v)+' langkah',how:nf(v)+' langkah, berat '+nf(kg,1)+' kg'};
+    return {ok:v>0,kind:'neat',label:t[1],minutes:v,kcal:Math.round(kcalMet(t[2],kg,v)),detail:'',how:'MET '+nf(t[2],1)+', berat '+nf(kg,1)+' kg, '+nf(v)+' menit'};
+  }
+  const rows=gymRows.map(r=>({n:String(r.n||'').trim(),s:num(r.s),r:num(r.r),w:num(r.w)})).filter(r=>r.s>0&&r.r>0);
+  const min=num($('#wg-min').value),g=gymMet(rows,min,kg);
+  return {ok:rows.length>0&&min>0,kind:'gym',label:'Gym, '+rows.length+' gerakan',minutes:min,kcal:Math.round(kcalMet(g.met,kg,min)),detail:'volume '+nf(g.vol)+' kg',rows:rows,how:'volume angkatan '+nf(g.vol)+' kg, MET '+nf(g.met,1)+', '+nf(min)+' menit'};
+}
+function wPreview(){
+  $('#work-need').hidden=!!S.profile;
+  const c=wcalc();
+  $('#wf-prev').innerHTML=c.ok?'<span class="muted small">Perkiraan kalori terbakar</span><br><b>'+nf(c.kcal)+' kkal</b><div class="hint" style="margin-top:4px">'+esc(c.how)+'</div>':'<span class="muted small">Isi durasi dan data latihan untuk melihat perkiraan kalori.</span>';
+}
+function setWmode(m){
+  wmode=m;
+  $$('[data-wmode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.wmode===m?'true':'false'));
+  $('#wf-sport').hidden=m!=='sport';$('#wf-gym').hidden=m!=='gym';$('#wf-neat').hidden=m!=='neat';
+  $('#wf-err').hidden=true;wPreview();
+}
+function neatLabel(){const steps=$('#wn-type').value==='steps';$('#wn-lab').textContent=steps?'Jumlah langkah':'Durasi (menit)';$('#wn-min').value=steps?'6000':'30'}
+function saveWork(e){
+  e.preventDefault();
+  const err=$('#wf-err'),c=wcalc();
+  if(!c.ok){err.textContent=wmode==='gym'?'Isi durasi dan sedikitnya satu gerakan dengan set dan repetisi.':'Isi durasi atau jumlah langkah lebih dari 0.';err.hidden=false;return}
+  err.hidden=true;
+  const w={id:uid(),ts:Date.now(),day:ymd(),kind:c.kind,label:c.label,minutes:Math.round(c.minutes),kcal:c.kcal,detail:c.detail};
+  if(c.kind==='gym')w.rows=c.rows.map((r,i)=>({n:r.n||('Gerakan '+(i+1)),s:r.s,r:r.r,w:r.w}));
+  S.workouts.push(w);
+  save();renderAll();toast('Tercatat: '+nf(c.kcal)+' kkal terbakar');
+}
+function renderWork(){
+  const today=ymd();let days=[],max=1;
+  for(let i=6;i>=0;i--){const d=addDays(today,-i);const k=Math.round(dayInfo(d).wk);days.push({d:d,k:k});if(k>max)max=k}
+  $('#work-week').innerHTML='<div class="bars" role="img" aria-label="Kalori terbakar dari olahraga per hari selama 7 hari terakhir">'+days.map(x=>'<div class="bar'+(x.k===0?' zero':'')+(x.d===today?' today':'')+'"><span class="v">'+(x.k?nf(x.k):'0')+'</span><div class="col"><i style="height:'+(x.k?Math.max(4,x.k/max*100):2).toFixed(0)+'%"></i></div><span class="d">'+esc(wdShort(x.d))+'</span></div>').join('')+'</div>';
+  const ws=todayWorks(),tot=ws.reduce((a,w)=>a+w.kcal,0);
+  $('#work-list').innerHTML=logHTML([],ws,true,'Olahraga hari ini'+(ws.length?' · '+nf(tot)+' kkal':''));
+  wPreview();
+}
+
+/* ================= MY JOURNEY ================= */
+const TITLES=['Pemanasan','Mulai Terbiasa','Ritme Baru','Makin Ringan','Tetap Semangat','Jalan Terus','Naik Tanjakan','Stabil Lagi','Makin Kuat','Tembus Batas','Pantang Mundur','Hampir Sampai'];
+function simValue(){
+  if(S.sim!=null)return clamp(S.sim,20,100);
+  const m=Math.round(consistency14()*100/5)*5;
+  return m>0?clamp(m,20,100):80;
+}
+function pathHTML(m,demo){
+  const items=m.nodes.map((n,idx)=>{
+    const st=idx<m.cur?'done':idx===m.cur?'current':'locked';
+    const fin=n.kind==='final';
+    let cls='node '+st+(fin?' final':'');
+    let style='';
+    if(idx===m.cur-1&&m.cur<m.nodes.length){cls+=' lead';style=' style="--p:'+(m.frac*100).toFixed(0)+'%"'}
+    let icon;
+    if(st==='current')icon=MASCOT;else if(n.kind==='start')icon=ico('play');else if(st==='done')icon=ico('check');else icon=fin?ico('flag'):ico('lock');
+    if(fin&&st==='done')icon=ico('flag');
+    const title=n.kind==='start'?'Start':'Level '+n.i+(fin?' · Berat ideal':'');
+    const sub=n.kind==='start'?'Awal perjalanan':fin?'Garis finis':TITLES[(n.i-1)%TITLES.length];
+    let status='';
+    if(st==='done')status=n.kind==='start'?'Mulai '+fmtDate(demo?ymd():S.profile.startDate):'Tercapai '+fmtDate(S.reached[idx]||ymd());
+    else if(st==='current'){
+      const rem=Math.abs(m.est-n.w);
+      status='Sedang dijalani, sisa '+nf(rem,1)+' kg ke level ini';
+    }else{
+      if(demo)status='Terbuka setelah level sebelumnya';
+      else{const e=eta(Math.abs(m.est-n.w),simValue()/100);status=e?(e.far?'Perkiraan lebih dari 4 tahun':'Perkiraan '+fmtDate(e.date)):'Perkiraan belum bisa dihitung'}
+    }
+    return '<li class="'+cls+'"'+style+'><span class="badge">'+icon+'</span><div class="nbody"><div class="nhead"><b>'+esc(title)+'</b><span class="w">'+nf(n.w,1)+' kg</span></div><div class="muted small">'+esc(sub)+'</div><div class="small" style="margin-top:4px">'+esc(status)+'</div>'+(st==='current'?'<div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(m.frac*100)+'" aria-label="Progres menuju level ini"><i style="width:'+(m.frac*100).toFixed(0)+'%"></i></div>':'')+'</div></li>';
+  });
+  return '<ol class="path">'+items.join('')+'</ol>';
+}
+function demoModel(){
+  const nodes=[{i:0,w:70,kind:'start'}];
+  for(let k=1;k<=6;k++)nodes.push({i:k,w:70-k,kind:k===6?'final':'mid'});
+  return {nodes:nodes,cur:1,frac:0.3,est:69.7,start:70,target:64,dir:-1};
+}
+function renderJourney(){
+  const p=S.profile,pl=S.plan,st=$('#jr-state');
+  let m=journeyModel();
+  const normal=!!m&&!m.flat;
+  $('#jw-card').hidden=!normal;$('#jr-sim-card').hidden=!normal;
+  $('#jr-demo').hidden=normal;
+  if(m&&m.changed){save()}
+  if(!p){
+    st.innerHTML='<div class="card peach"><p>Isi profil dulu, lalu minta ahli gizi menentukan target berat badanmu.</p><div style="margin-top:10px"><button type="button" class="btn sm" data-go="profile">Isi profil</button></div></div>';
+  }else if(!pl){
+    st.innerHTML='<div class="card peach"><p>Belum ada target berat. Konsultasi dulu dengan ahli gizi, lalu ambil targetnya agar levelmu muncul.</p><div style="margin-top:10px"><button type="button" class="btn sm" data-go="qai">Ke Q&amp;AI Nutritionists</button></div></div>';
+  }else if(m&&m.flat){
+    st.innerHTML='<div class="card peach"><p>Targetmu hampir sama dengan berat awal, jadi belum ada level yang perlu dilewati. Atur target baru di Q&amp;AI Nutritionists bila ingin mulai perjalanan.</p></div>';
+  }else st.innerHTML='';
+  if(!normal){
+    $('#jr-summary').innerHTML='';
+    $('#jr-path').innerHTML=(m&&m.flat)?'':pathHTML(demoModel(),true);
+    $('#jr-path-t').textContent='Jalur levelmu';
+    return;
+  }
+  const dirTxt=m.dir<0?'turun':'naik';
+  const fat=m.defAll/7700;
+  const lastW=S.weights.slice().sort((a,b)=>a.day<b.day?-1:a.day>b.day?1:0).pop();
+  const allDone=m.cur>=m.nodes.length;
+  $('#jr-summary').innerHTML='<div class="card peach"><h3>'+(allDone?'Target tercapai':'Level '+m.cur+' dari '+(m.nodes.length-1))+'</h3><p class="small muted" style="margin-top:4px">Awal '+nf(m.start,1)+' kg, target '+nf(m.target,1)+' kg, perkiraan sekarang '+nf(m.est,1)+' kg'+(lastW?' (timbangan terakhir '+nf(lastW.kg,1)+' kg pada '+esc(fmtDate(lastW.day))+')':'')+'.</p><div class="stat-grid" style="margin-top:14px"><div class="stat"><span class="k">Kalori terbakar dari olahraga</span><b>'+nf(m.wkAll)+'</b><span class="u">kkal sejak mulai</span></div><div class="stat"><span class="k">'+(fat>=0?'Defisit kalori tercatat':'Surplus kalori tercatat')+'</span><b>'+nf(Math.abs(m.defAll))+'</b><span class="u">kkal dari '+m.logged+' hari bercatatan</span></div><div class="stat"><span class="k">Perkiraan berat '+(fat>=0?'turun':'naik')+'</span><b>'+nf(Math.abs(fat),1)+'</b><span class="u">kg dari catatanmu</span></div><div class="stat"><span class="k">Hari berjalan</span><b>'+nf(m.days)+'</b><span class="u">sejak '+esc(fmtDate(S.profile.startDate))+'</span></div></div><p class="hint" style="margin-top:12px">Defisit dihitung dari kebutuhan energi harian ditambah olahraga, dikurangi kalori yang kamu catat. Sekitar 7.700 kkal setara 1 kg berat badan. Hari tanpa catatan makanan tidak dihitung.</p></div>';
+  $('#jr-path-t').textContent='Jalur levelmu, '+dirTxt+' menuju '+nf(m.target,1)+' kg';
+  $('#jr-path').innerHTML=pathHTML(m,false);
+  const rg=$('#jr-c'),cv=simValue();
+  if(document.activeElement!==rg)rg.value=cv;
+  const meas=Math.round(consistency14()*100);
+  $('#jr-meas').textContent='Konsistensimu 14 hari terakhir: '+meas+'%';
+  renderSim(m);
+}
+function renderSim(m){
+  const c=clamp(num($('#jr-c').value,80),20,100)/100;
+  $('#jr-cv').textContent=Math.round(c*100)+'%';
+  const remain=Math.abs(m.est-m.target);
+  if(m.cur>=m.nodes.length){$('#jr-sim-out').innerHTML='<p class="sim-big">Berat idealmu sudah tercapai.</p><p class="small muted" style="margin-top:6px">Lanjutkan dengan mempertahankan pola makan dan olahraga.</p>';return}
+  const e=eta(remain,c);
+  let h;
+  if(!e)h='<p class="sim-big">Belum bisa diperkirakan</p><p class="small" style="margin-top:6px">Dengan target kalori dan kebiasaan olahragamu sekarang, belum ada perubahan berat yang terukur. Tanyakan ke ahli gizi atau tambah catatan olahraga.</p>';
+  else{
+    const perWeek=perDayRate(c)*7;
+    h='<p class="sim-big">'+(e.far?'Lebih dari 4 tahun lagi':esc(fmtDate(e.date)))+'</p><p class="small" style="margin-top:6px">'+(e.far?'':'Sekitar '+nf(e.weeks)+' minggu lagi, ')+'dengan laju rata-rata '+nf(perWeek,2)+' kg per minggu pada konsistensi '+Math.round(c*100)+'%.'+(perWeek>=0.99?' Laju dibatasi 1 kg per minggu demi keamanan.':'')+'</p>';
+  }
+  h+='<ul class="scen" style="margin-top:12px">'+[1,0.8,0.6,0.4].map(x=>{const r=eta(remain,x);return '<li><span>Konsisten '+Math.round(x*100)+'%</span><span>'+(r?(r.far?'lebih dari 4 tahun':nf(r.weeks)+' minggu, '+esc(fmtDate(r.date))):'belum bisa dihitung')+'</span></li>'}).join('')+'</ul><p class="hint" style="margin-top:8px">Perkiraan memakai target kalori harian, kebutuhan energimu, dan rata-rata kalori olahragamu dengan asumsi 4 hari olahraga per minggu. Ini gambaran, bukan janji.</p>';
+  $('#jr-sim-out').innerHTML=h;
+}
+function saveWeigh(e){
+  e.preventDefault();
+  const err=$('#jw-err'),kg=num($('#jw-kg').value);
+  if(!(kg>=30&&kg<=250)){err.textContent='Isi berat badan antara 30 dan 250 kg.';err.hidden=false;return}
+  err.hidden=true;
+  const d=ymd();S.weights=S.weights.filter(x=>x.day!==d);S.weights.push({day:d,kg:Math.round(kg*10)/10});
+  $('#jw-kg').value='';save();renderAll();toast('Berat hari ini tercatat');
+}
+
+/* ================= daily review ================= */
+async function runReview(){
+  const btn=$('#ai-review-btn'),out=$('#ai-review-out');
+  if(!sampleFn||aiOff()){toast('Fitur AI belum tersedia di tampilan ini.');return}
+  setBusy(btn,true);out.hidden=false;
+  out.innerHTML='<p class="muted"><span class="spin"></span>Sedang menyusun ulasan</p>';
+  const ms=todayMeals(),ws=todayWorks(),i=dayInfo(ymd());
+  const prompt='Kamu ahli gizi virtual Feazy Diet. Beri ulasan singkat untuk hari ini dalam bahasa Indonesia, maksimal 110 kata, 3 sampai 4 bullet tanpa tabel: apa yang sudah bagus, apa yang perlu diperbaiki, dan satu langkah konkret untuk sisa hari ini atau besok. Sesuaikan dengan kondisi kesehatan pengguna.\n\n'+SAFETY+'\n\nPROFIL PENGGUNA\n'+ctxText()+'\n\nMakanan hari ini:\n'+(ms.length?ms.map(m=>'- '+m.type+': '+m.name+' ('+m.kcal+' kkal, protein '+(m.protein||0)+' g, karbo '+(m.carbs||0)+' g, lemak '+(m.fat||0)+' g)').join('\n'):'(belum ada)')+'\n\nOlahraga hari ini:\n'+(ws.length?ws.map(w=>'- '+w.label+(w.minutes?' '+w.minutes+' menit':'')+' ('+w.kcal+' kkal terbakar)').join('\n'):'(belum ada)')+'\n\nTotal masuk '+Math.round(i.intake)+' kkal. Total keluar (kebutuhan dasar dan aktivitas harian plus olahraga) '+Math.round(baseBurn()+i.wk)+' kkal.\nJika data makanan atau olahraga belum ada, katakan itu dan beri pengingat yang ramah.';
+  try{
+    const r=await sampleFn(prompt,{cache:false,onText:u=>{out.innerHTML=md(u.text)}});
+    out.innerHTML=md(r.text);
+  }catch(e){out.innerHTML='<p class="err">'+esc(aiErr(e))+'</p>'}
+  finally{setBusy(btn,false)}
+}
+
+/* ================= render all ================= */
+function renderAvatar(){
+  const b=$('#btn-profile'),n=S.profile&&S.profile.name?S.profile.name.trim():'';
+  b.innerHTML=n?esc(n.charAt(0).toUpperCase()):ico('user');
+}
+function renderAll(){
+  renderAvatar();renderBanner();renderHome();renderPlan();renderTake();renderWork();renderJourney();remStatus();
+}
+function delEntry(kind,id){
+  if(kind==='m')S.meals=S.meals.filter(x=>x.id!==id);
+  else S.workouts=S.workouts.filter(x=>x.id!==id);
+  save();renderAll();toast('Catatan dihapus');
+}
+
+/* ================= events ================= */
+function bind(){
+  document.addEventListener('click',e=>{
+    const g=e.target.closest('[data-go]');
+    if(g){go(g.dataset.go);return}
+    const d=e.target.closest('[data-del]');
+    if(d){delEntry(d.dataset.del,d.dataset.id);return}
+    const a=e.target.closest('[data-act]');
+    if(a){
+      if(a.dataset.act==='plan-ai')proposePlan(a);
+      else if(a.dataset.act==='plan-use')usePlan();
+      else if(a.dataset.act==='plan-cancel'){proposed=null;$('#plan-proposal').innerHTML=''}
+      return;
+    }
+    const q=e.target.closest('[data-q]');
+    if(q){sendChat(q.dataset.q);return}
+    const c=e.target.closest('[data-cond]');
+    if(c){const v=c.dataset.cond;if(condSel.has(v))condSel.delete(v);else condSel.add(v);paintConds();return}
+    const wmb=e.target.closest('[data-wmode]');
+    if(wmb){setWmode(wmb.dataset.wmode);return}
+    const gd=e.target.closest('[data-gdel]');
+    if(gd){gymRows.splice(+gd.dataset.gdel,1);if(!gymRows.length)gymRows.push({n:'',s:3,r:10,w:''});renderGym();wPreview();return}
+  });
+  $('#pf-form').addEventListener('submit',saveProfile);
+  $('#pf-reset').addEventListener('click',()=>{$('#pf-reset-box').hidden=false});
+  $('#pf-reset-no').addEventListener('click',()=>{$('#pf-reset-box').hidden=true});
+  $('#pf-reset-yes').addEventListener('click',()=>{
+    S=blank();condSel=new Set();proposed=null;
+    ['pf-name','pf-age','pf-height','pf-weight','pf-other','pf-allergy','pf-meds'].forEach(id=>{$('#'+id).value=''});
+    save();$('#pf-reset-box').hidden=true;$('#plan-proposal').innerHTML='';renderChat();renderAll();paintConds();bmiCard();toast('Semua data dihapus');go('home');
+  });
+  $('#chat-form').addEventListener('submit',e=>{e.preventDefault();sendChat($('#chat-input').value)});
+  $('#chat-input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();sendChat($('#chat-input').value)}});
+  $('#chat-stop').addEventListener('click',()=>{if(chatCtl)chatCtl.abort()});
+  $('#pl-form').addEventListener('submit',manualPlan);
+  $('#photo').addEventListener('change',e=>{onPhoto(e.target.files&&e.target.files[0])});
+  const drop=$('#drop');
+  ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over')}));
+  ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over')}));
+  drop.addEventListener('drop',e=>{if(!$('#photo').disabled)onPhoto(e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0])});
+  $('#take-analyze').addEventListener('click',analyze);
+  $('#take-clear').addEventListener('click',()=>{if(takeCtl)takeCtl.abort();clearPhoto();$('#photo').click()});
+  $('#take-result').addEventListener('submit',e=>{if(e.target.id==='res-form')saveFood(e)});
+  $('#man-form').addEventListener('submit',saveManual);
+  $('#wf').addEventListener('submit',saveWork);
+  $('#wf').addEventListener('input',e=>{
+    const t=e.target;
+    if(t.dataset&&t.dataset.g){const r=gymRows[+t.dataset.i];if(r)r[t.dataset.g]=t.value}
+    wPreview();
+  });
+  $('#wn-type').addEventListener('change',()=>{neatLabel();wPreview()});
+  $('#gym-add').addEventListener('click',()=>{gymRows.push({n:'',s:3,r:10,w:''});renderGym();const ins=$$('#gym-rows .gn');if(ins.length)ins[ins.length-1].focus();wPreview()});
+  $('#jw-form').addEventListener('submit',saveWeigh);
+  let simT=null;
+  $('#jr-c').addEventListener('input',()=>{
+    S.sim=clamp(num($('#jr-c').value,80),20,100);
+    const m=journeyModel();if(m&&!m.flat){renderSim(m);$('#jr-path').innerHTML=pathHTML(m,false)}
+    clearTimeout(simT);simT=setTimeout(save,800);
+  });
+  $('#jr-usemeas').addEventListener('click',()=>{
+    const v=clamp(Math.round(consistency14()*100/5)*5,20,100);
+    $('#jr-c').value=v;S.sim=v;save();renderJourney();
+  });
+  $('#ai-review-btn').addEventListener('click',runReview);
+  $('#rem-sw').addEventListener('click',toggleNotify);
+  $('#rem-time').addEventListener('change',e=>{if(/^\d\d:\d\d$/.test(e.target.value)){S.rem.time=e.target.value;S.rem.last='';save();remStatus();renderBanner()}});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){renderBanner();renderHome();notifyTick()}});
+}
+
+/* ================= start ================= */
+function init(){
+  $('#logo').innerHTML=MASCOT;
+  $('#hero-mascot').innerHTML=MASCOT;
+  $$('[data-wm]').forEach(el=>{el.innerHTML=wm(el.dataset.wm)});
+  buildTabs();buildConds();
+  fillSelect($('#ws-type'),SPORT);fillSelect($('#wn-type'),NEAT);
+  $('#man-type').innerHTML=mealOptions(mealDefault());
+  renderChatChips();renderGym();
+  loadLocal();
+  renderChat();renderAll();syncBadge();
+  bind();
+  const v=BYHASH[(location.hash||'').slice(1)];
+  show(v||'home');
+  initAI();initRemote();
+  setInterval(()=>{renderBanner();notifyTick()},60000);
+  notifyTick();
+}
+init();
+})();
+</script>
+
+</body></html>
